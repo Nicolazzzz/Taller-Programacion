@@ -28,7 +28,7 @@ public class Controller {
 					3) Maderas
 					4) Salir
 
-
+a
 					""";
 
 			vf.getCon().printLine(menuPpal);
