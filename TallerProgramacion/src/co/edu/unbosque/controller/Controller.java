@@ -141,7 +141,9 @@ public class Controller {
 				vf.getCon().printLine("Ingrese nombre pincel a eliminar");
 				String delete = vf.getCon().readLine();
 
-				mf.getPincelDAO().delete(new PincelDTO(0, 0, 0, delete, null, null, null, null, null));
+				if (mf.getPincelDAO().delete(new PincelDTO(0, 0, 0, delete, null, null, null, null, null)) == false) {
+					vf.getCon().printLine("NO COINCIDE CON NINGUN DATO DEL INVENTARIO");
+				}
 				break;
 			case 5:
 				break piLoop;
