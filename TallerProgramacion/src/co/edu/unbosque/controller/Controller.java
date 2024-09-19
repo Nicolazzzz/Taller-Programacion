@@ -1,4 +1,5 @@
 package co.edu.unbosque.controller;
+import co.edu.unbosque.view.ViewFacade;
 
 import co.edu.unbosque.model.ModelFacade;
 import co.edu.unbosque.model.PincelDTO;
@@ -50,6 +51,7 @@ public class Controller {
 
 			default:
 				vf.getCon().printLine("FALTA CEREBRO LLAVE");
+				System.out.println("eso de trasnochar como que no es bueno");
 				break;
 			}
 
