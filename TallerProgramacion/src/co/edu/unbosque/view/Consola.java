@@ -30,6 +30,10 @@ public class Consola {
 		return sc.nextDouble();
 	}
 
+	public float readFloat() {
+		return sc.nextFloat();
+	}
+
 	public String readLine() {
 		return sc.nextLine();
 	}
