@@ -3,6 +3,7 @@ package co.edu.unbosque.controller;
 import co.edu.unbosque.view.ViewFacade;
 
 import co.edu.unbosque.model.ModelFacade;
+import co.edu.unbosque.model.Pincel;
 import co.edu.unbosque.model.PincelDTO;
 import co.edu.unbosque.model.PinturaDTO;
 import co.edu.unbosque.model.ProyectoMaderaDTO;
@@ -120,6 +121,10 @@ public class Controller {
 				String name = vf.getCon().readLine();
 
 				vf.getCon().printLine("ACTUALIZANDO PINCEL");
+
+				if (mf.getPincelDAO().find(new Pincel(0, 0, 0, name, null, null, null, null, null)) == null) {
+					break;
+				}
 
 				vf.getCon().printLine("compra");
 				double precioCompraA = vf.getCon().readDouble();
