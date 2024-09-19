@@ -10,17 +10,17 @@ public class Pincel extends Producto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Pincel(String grosorCerdas, String material, String tipoPincel) {
+	public Pincel(String grosorCerda, String material, String tipoPincel) {
 		super();
-		this.grosorCerda = grosorCerdas;
+		this.grosorCerda = grosorCerda;
 		this.material = material;
 		this.tipoPincel = tipoPincel;
 	}
 
 	public Pincel(double precioCompra, double precioVenta, int cantidad, String nombre, String tamanio, String marca,
-			String grosorCerdas, String material, String tipoPincel) {
+			String grosorCerda, String material, String tipoPincel) {
 		super(precioCompra, precioVenta, cantidad, nombre, tamanio, marca);
-		this.grosorCerda = grosorCerdas;
+		this.grosorCerda = grosorCerda;
 		this.material = material;
 		this.tipoPincel = tipoPincel;
 	}
