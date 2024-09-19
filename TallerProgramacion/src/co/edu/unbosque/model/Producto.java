@@ -1,5 +1,7 @@
 package co.edu.unbosque.model;
 
+import java.io.Serializable;
+
 /**
  * La clase abstracta Producto representa un producto genérico con atributos
  * básicos como precio de compra, precio de venta, cantidad, nombre, tamaño y
@@ -9,8 +11,12 @@ package co.edu.unbosque.model;
  * @version 1.0
  * @since 2024-04-27
  */
-public abstract class Producto {
+public abstract class Producto implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3L;
 	private double precioCompra;
 	private double precioVenta;
 	private int cantidad;

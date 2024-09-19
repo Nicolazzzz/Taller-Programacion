@@ -58,27 +58,6 @@ public class FileHandler {
 	 * @param content el contenido que se escribirá en el archivo
 	 */
 
-	public static void writeSerialized(String url, Object content) {
-
-		try {
-			archivo = new File(FOLDER_NAME + "/" + url);
-
-			if (!archivo.exists()) {
-				archivo.createNewFile();
-			}
-
-			fos = new FileOutputStream(archivo);
-			oos = new ObjectOutputStream(fos);
-			oos.writeObject(content);
-			fos.close();
-			oos.close();
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
 	public static void writeFile(String url, String content) {
 		try {
 			archivo = new File(FOLDER_NAME + "/" + url);
@@ -124,6 +103,53 @@ public class FileHandler {
 			System.out.println("ERROR EN LA LECTURA DEL ARCHIVO (TEXTO PLANO)");
 		}
 
+		return null;
+	}
+
+	public static void writeSerialized(String url, Object content) {
+
+		try {
+			archivo = new File(FOLDER_NAME + "/" + url);
+			if (!archivo.exists()) {
+				archivo.createNewFile();
+			}
+
+			fos = new FileOutputStream(archivo);
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(content);
+			fos.close();
+			oos.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("ERROR EN CREAR ARCHIVO (Serialized)");
+		}
+
+	}
+
+	public static Object readSerialized(String url) {
+
+		try {
+			archivo = new File(FOLDER_NAME + "/" + url);
+			if (!archivo.exists()) {
+				archivo.createNewFile();
+			}
+
+			fis = new FileInputStream(archivo);
+			ois = new ObjectInputStream(fis);
+
+			Object content = ois.readObject();
+
+			fis.close();
+			ois.close();
+			return content;
+
+		} catch (IOException e) {
+			System.out.println("ERROR EN LECTURA DE ARCHIVO (SERIALIZED)");
+		} catch (ClassNotFoundException e) {
+			System.out.println("ERROR AL LEER LOS DATOS DEL SERIALIZED(CLASS NOT FOUND");
+
+		}
 		return null;
 	}
 }

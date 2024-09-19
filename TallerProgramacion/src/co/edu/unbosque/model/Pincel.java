@@ -1,5 +1,7 @@
 package co.edu.unbosque.model;
 
+import java.io.Serializable;
+
 /**
  * La clase Pincel representa un producto específico que hereda de la clase
  * Producto. Esta clase añade atributos particulares de un pincel, como el
@@ -9,8 +11,12 @@ package co.edu.unbosque.model;
  * @version 1.0
  * @since 2024-04-27
  */
-public class Pincel extends Producto {
+public class Pincel extends Producto implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String grosorCerda;
 	private String material;
 	private String tipoPincel;

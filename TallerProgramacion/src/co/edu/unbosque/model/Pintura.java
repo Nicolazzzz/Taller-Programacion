@@ -1,5 +1,7 @@
 package co.edu.unbosque.model;
 
+import java.io.Serializable;
+
 /**
  * La clase Pintura extiende la clase Producto e incorpora propiedades
  * adicionales específicas de una pintura, como su color, contenido en
@@ -9,8 +11,12 @@ package co.edu.unbosque.model;
  * @version 1.0
  * @since 2024-04-27
  */
-public class Pintura extends Producto {
+public class Pintura extends Producto implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2L;
 	private String color;
 	private float contenidoMl;
 	private boolean esVinilo;

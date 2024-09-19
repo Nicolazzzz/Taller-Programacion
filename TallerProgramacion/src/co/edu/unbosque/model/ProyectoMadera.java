@@ -1,5 +1,7 @@
 package co.edu.unbosque.model;
 
+import java.io.Serializable;
+
 /**
  * La clase ProyectoMadera representa un producto hecho de madera que puede ser
  * cortado a mano, cortado con láser y/o grabado. Extiende la clase abstracta
@@ -9,8 +11,12 @@ package co.edu.unbosque.model;
  * @version 1.0
  * @since 2024-04-27
  */
-public class ProyectoMadera extends Producto {
+public class ProyectoMadera extends Producto implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4L;
 	private boolean esCortadoMano;
 	private boolean esCortadoLaser;
 	private boolean esGrabado;

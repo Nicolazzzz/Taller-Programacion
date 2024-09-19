@@ -5,10 +5,10 @@ import co.edu.unbosque.view.ViewFacade;
 import co.edu.unbosque.model.ModelFacade;
 import co.edu.unbosque.model.Pincel;
 import co.edu.unbosque.model.PincelDTO;
+import co.edu.unbosque.model.Pintura;
 import co.edu.unbosque.model.PinturaDTO;
+import co.edu.unbosque.model.ProyectoMadera;
 import co.edu.unbosque.model.ProyectoMaderaDTO;
-import co.edu.unbosque.model.persistence.PinturaDAO;
-import co.edu.unbosque.view.ViewFacade;
 
 public class Controller {
 
@@ -41,7 +41,6 @@ public class Controller {
 
 			vf.getCon().printLine(menuPpal);
 			int op = vf.getCon().readInt();
-			vf.getCon().burnLine();
 			switch (op) {
 			case 1:
 				mostrarMenuPincel();
@@ -80,8 +79,6 @@ public class Controller {
 					""";
 			vf.getCon().printLine(menuPince);
 			int op = vf.getCon().readInt();
-			vf.getCon().burnLine();
-
 			switch (op) {
 			case 1:
 				vf.getCon().printLine("CREANDO PINCEL");
@@ -118,11 +115,13 @@ public class Controller {
 				break;
 			case 3:
 				vf.getCon().printLine("Ingrese el nombre de pincel a actualizar");
+				vf.getCon().burnLine();
 				String name = vf.getCon().readLine();
 
 				vf.getCon().printLine("ACTUALIZANDO PINCEL");
 
 				if (mf.getPincelDAO().find(new Pincel(0, 0, 0, name, null, null, null, null, null)) == null) {
+					vf.getCon().printLine("No se puede actualizar no coincide con ninguno");
 					break;
 				}
 
@@ -153,6 +152,7 @@ public class Controller {
 			case 4:
 				vf.getCon().printLine("ELIMINANDO PINCEL");
 				vf.getCon().printLine("Ingrese nombre pincel a eliminar");
+				vf.getCon().burnLine();
 				String delete = vf.getCon().readLine();
 
 				if (mf.getPincelDAO().delete(new PincelDTO(0, 0, 0, delete, null, null, null, null, null)) == false) {
@@ -186,7 +186,6 @@ public class Controller {
 					""";
 			vf.getCon().printLine(menuPintu);
 			int op = vf.getCon().readInt();
-			vf.getCon().burnLine();
 			switch (op) {
 			case 1:
 				vf.getCon().printLine("CREANDO PINTURA");
@@ -206,7 +205,6 @@ public class Controller {
 				String marca = vf.getCon().readLine();
 				vf.getCon().printLine("color");
 				String color = vf.getCon().readLine();
-				vf.getCon().burnLine();
 				vf.getCon().printLine("contenido en ML");
 				float contenido = vf.getCon().readFloat();
 				vf.getCon().printLine("es vinilo");
@@ -226,7 +224,13 @@ public class Controller {
 				break;
 			case 3:
 				vf.getCon().printLine("Ingrese el nombre de pintura a actualizar");
+				vf.getCon().burnLine();
 				String name = vf.getCon().readLine();
+
+				if (mf.getPinturaDAO().find(new Pintura(0, 0, 0, name, null, null, null, 0, false, false)) == null) {
+					vf.getCon().printLine("No se puede actualizar no coincide con ninguno");
+					break;
+				}
 
 				vf.getCon().printLine("ACTUALIZANDO PINTURA");
 
@@ -245,7 +249,6 @@ public class Controller {
 				String marcaA = vf.getCon().readLine();
 				vf.getCon().printLine("color");
 				String colorA = vf.getCon().readLine();
-				vf.getCon().burnLine();
 				vf.getCon().printLine("contenido en ML");
 				float contenidoA = vf.getCon().readFloat();
 				vf.getCon().printLine("es vinilo");
@@ -260,6 +263,7 @@ public class Controller {
 			case 4:
 				vf.getCon().printLine("ELIMINANDO PINTURA");
 				vf.getCon().printLine("Ingrese nombre pintura a eliminar");
+				vf.getCon().burnLine();
 				String delete = vf.getCon().readLine();
 
 				if (mf.getPinturaDAO()
@@ -294,7 +298,6 @@ public class Controller {
 					""";
 			vf.getCon().printLine(menuMadera);
 			int op = vf.getCon().readInt();
-			vf.getCon().burnLine();
 			switch (op) {
 			case 1:
 				vf.getCon().printLine("CREANDO P MADERA");
@@ -331,7 +334,14 @@ public class Controller {
 				break;
 			case 3:
 				vf.getCon().printLine("Ingrese el nombre de pincel a actualizar");
+				vf.getCon().burnLine();
 				String name = vf.getCon().readLine();
+
+				if (mf.getpMaderaDAO()
+						.find(new ProyectoMadera(0, 0, 0, name, null, null, false, false, false)) == null) {
+					vf.getCon().printLine("No se puede actualizar no coincide con ninguno");
+					break;
+				}
 
 				vf.getCon().printLine("ACTUALIZANDO PINCEL");
 
@@ -362,6 +372,7 @@ public class Controller {
 			case 4:
 				vf.getCon().printLine("ELIMINANDO MADERA");
 				vf.getCon().printLine("Ingrese nombre madera a eliminar");
+				vf.getCon().burnLine();
 				String delete = vf.getCon().readLine();
 
 				if (mf.getpMaderaDAO()
