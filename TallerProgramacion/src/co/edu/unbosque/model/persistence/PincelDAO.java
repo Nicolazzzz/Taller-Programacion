@@ -135,6 +135,8 @@ public class PincelDAO implements CRUDOperation<PincelDTO, Pincel> {
 			content += "\n";
 
 		}
+		FileHandler.writeFile(FILE_NAME, content);
+
 	}
 
 }
