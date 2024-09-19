@@ -2,29 +2,42 @@ package co.edu.unbosque.model;
 
 public abstract class Producto {
 
-	private double precio;
+	private double precioCompra;
+	private double precioVenta;
 	private int cantidad;
-	private String nombreProducto;
+	private String nombre;
+	private String tamanio;
 	private String marca;
 
 	public Producto() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Producto(double precio, int cantidad, String nombreProducto, String marca) {
+	public Producto(double precioCompra, double precioVenta, int cantidad, String nombre, String tamanio,
+			String marca) {
 		super();
-		this.precio = precio;
+		this.precioCompra = precioCompra;
+		this.precioVenta = precioVenta;
 		this.cantidad = cantidad;
-		this.nombreProducto = nombreProducto;
+		this.nombre = nombre;
+		this.tamanio = tamanio;
 		this.marca = marca;
 	}
 
-	public double getPrecio() {
-		return precio;
+	public double getPrecioCompra() {
+		return precioCompra;
 	}
 
-	public void setPrecio(double precio) {
-		this.precio = precio;
+	public void setPrecioCompra(double precioCompra) {
+		this.precioCompra = precioCompra;
+	}
+
+	public double getPrecioVenta() {
+		return precioVenta;
+	}
+
+	public void setPrecioVenta(double precioVenta) {
+		this.precioVenta = precioVenta;
 	}
 
 	public int getCantidad() {
@@ -35,12 +48,20 @@ public abstract class Producto {
 		this.cantidad = cantidad;
 	}
 
-	public String getNombreProducto() {
-		return nombreProducto;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setNombreProducto(String nombreProducto) {
-		this.nombreProducto = nombreProducto;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getTamanio() {
+		return tamanio;
+	}
+
+	public void setTamanio(String tamanio) {
+		this.tamanio = tamanio;
 	}
 
 	public String getMarca() {
@@ -53,8 +74,8 @@ public abstract class Producto {
 
 	@Override
 	public String toString() {
-		return "\nPrecio: " + precio + "\nCantidad: " + cantidad + "\nNombre Producto: " + nombreProducto + "\nMarca: "
-				+ marca;
+		return "\nPrecio Compra: " + precioCompra + "\nPrecio Venta: " + precioVenta + "\nCantidad: " + cantidad
+				+ "\nNombre: " + nombre + "\nTamaño: " + tamanio + "\nMarca: " + marca;
 	}
 
 }

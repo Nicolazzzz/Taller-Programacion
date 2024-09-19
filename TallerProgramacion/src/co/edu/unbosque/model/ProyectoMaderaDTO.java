@@ -1,23 +1,23 @@
 package co.edu.unbosque.model;
 
-public class ProyectoMadera extends Producto {
+public class ProyectoMaderaDTO extends Producto {
 
 	private boolean esCortadoMano;
 	private boolean esCortadoLaser;
 	private boolean esGrabado;
 
-	public ProyectoMadera() {
+	public ProyectoMaderaDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ProyectoMadera(boolean esCortadoMano, boolean esCortadoLaser, boolean esGrabado) {
+	public ProyectoMaderaDTO(boolean esCortadoMano, boolean esCortadoLaser, boolean esGrabado) {
 		super();
 		this.esCortadoMano = esCortadoMano;
 		this.esCortadoLaser = esCortadoLaser;
 		this.esGrabado = esGrabado;
 	}
 
-	public ProyectoMadera(double precioCompra, double precioVenta, int cantidad, String nombre, String tamanio,
+	public ProyectoMaderaDTO(double precioCompra, double precioVenta, int cantidad, String nombre, String tamanio,
 			String marca, boolean esCortadoMano, boolean esCortadoLaser, boolean esGrabado) {
 		super(precioCompra, precioVenta, cantidad, nombre, tamanio, marca);
 		this.esCortadoMano = esCortadoMano;
@@ -25,7 +25,7 @@ public class ProyectoMadera extends Producto {
 		this.esGrabado = esGrabado;
 	}
 
-	public ProyectoMadera(double precioCompra, double precioVenta, int cantidad, String nombre, String tamanio,
+	public ProyectoMaderaDTO(double precioCompra, double precioVenta, int cantidad, String nombre, String tamanio,
 			String marca) {
 		super(precioCompra, precioVenta, cantidad, nombre, tamanio, marca);
 		// TODO Auto-generated constructor stub

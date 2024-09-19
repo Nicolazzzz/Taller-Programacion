@@ -1,23 +1,23 @@
 package co.edu.unbosque.model;
 
-public class Pincel extends Producto {
+public class PincelDTO extends Producto {
 
 	private String grosorCerdas;
 	private String material;
 	private String tipoPincel;
 
-	public Pincel() {
+	public PincelDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Pincel(String grosorCerdas, String material, String tipoPincel) {
+	public PincelDTO(String grosorCerdas, String material, String tipoPincel) {
 		super();
 		this.grosorCerdas = grosorCerdas;
 		this.material = material;
 		this.tipoPincel = tipoPincel;
 	}
 
-	public Pincel(double precioCompra, double precioVenta, int cantidad, String nombre, String tamanio, String marca,
+	public PincelDTO(double precioCompra, double precioVenta, int cantidad, String nombre, String tamanio, String marca,
 			String grosorCerdas, String material, String tipoPincel) {
 		super(precioCompra, precioVenta, cantidad, nombre, tamanio, marca);
 		this.grosorCerdas = grosorCerdas;
@@ -25,7 +25,7 @@ public class Pincel extends Producto {
 		this.tipoPincel = tipoPincel;
 	}
 
-	public Pincel(double precioCompra, double precioVenta, int cantidad, String nombre, String tamanio, String marca) {
+	public PincelDTO(double precioCompra, double precioVenta, int cantidad, String nombre, String tamanio, String marca) {
 		super(precioCompra, precioVenta, cantidad, nombre, tamanio, marca);
 		// TODO Auto-generated constructor stub
 	}
