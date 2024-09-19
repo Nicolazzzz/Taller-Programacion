@@ -16,4 +16,8 @@ public interface CRUDOperation<D, E> {
 
 	public boolean update(D previous, D newData);
 
+	public void readFile();
+
+	public void writeFile();
+
 }
