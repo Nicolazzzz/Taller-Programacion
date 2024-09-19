@@ -1,6 +1,6 @@
 package co.edu.unbosque.model;
 
-public class ProyectoMaderaDTO extends Producto {
+public class ProyectoMaderaDTO extends ProductoDTO {
 
 	private boolean esCortadoMano;
 	private boolean esCortadoLaser;
