@@ -11,7 +11,8 @@ public class PinturaDAO implements CRUDOperation<PinturaDTO, Pintura> {
 	private final String FILE_NAME = "pinturas.csv";
 
 	public PinturaDAO() {
-		listaPinturas = new ArrayList<>();
+		FileHandler.checkFolder();
+		readFile();
 	}
 
 	@Override
@@ -56,11 +57,11 @@ public class PinturaDAO implements CRUDOperation<PinturaDTO, Pintura> {
 	}
 
 	@Override
-	public Pintura find(Pintura toFind) { // elimina por color de pintura
+	public Pintura find(Pintura toFind) { // elimina por nombre
 		Pintura found = null;
 		if (!listaPinturas.isEmpty()) {
 			for (Pintura pintura : listaPinturas) {
-				if (pintura.getColor().equals(toFind.getColor())) {
+				if (pintura.getNombre().toLowerCase().equals(toFind.getNombre().toLowerCase())) {
 					found = pintura;
 					return found;
 				} else {
