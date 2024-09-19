@@ -1,8 +1,12 @@
 package co.edu.unbosque.model.persistence;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -27,6 +31,12 @@ public class FileHandler {
 	private static File archivo;
 	private static final String FOLDER_NAME = "data";
 
+	private static FileOutputStream fos;
+	private static ObjectOutputStream oos;
+
+	private static FileInputStream fis;
+	private static ObjectInputStream ois;
+
 	/**
 	 * Verifica si la carpeta especificada por {@code FOLDER_NAME} existe y es un
 	 * directorio. Si no existe, crea la carpeta.
@@ -47,6 +57,28 @@ public class FileHandler {
 	 * @param url     la ruta relativa del archivo dentro de la carpeta de datos
 	 * @param content el contenido que se escribirá en el archivo
 	 */
+
+	public static void writeSerialized(String url, Object content) {
+
+		try {
+			archivo = new File(FOLDER_NAME + "/" + url);
+
+			if (!archivo.exists()) {
+				archivo.createNewFile();
+			}
+
+			fos = new FileOutputStream(archivo);
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(content);
+			fos.close();
+			oos.close();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	public static void writeFile(String url, String content) {
 		try {
 			archivo = new File(FOLDER_NAME + "/" + url);
