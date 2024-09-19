@@ -22,6 +22,7 @@ public class Controller {
 	}
 
 	public void run() {
+		mostrarMenuPpal();
 
 	}
 
@@ -216,7 +217,7 @@ public class Controller {
 				}
 				break;
 			case 2:
-				vf.getCon().printLine(mf.getPincelDAO().showAll());
+				vf.getCon().printLine(mf.getPinturaDAO().showAll());
 				break;
 			case 3:
 				vf.getCon().printLine("Ingrese el nombre de pintura a actualizar");
@@ -321,7 +322,7 @@ public class Controller {
 				}
 				break;
 			case 2:
-				vf.getCon().printLine(mf.getPincelDAO().showAll());
+				vf.getCon().printLine(mf.getpMaderaDAO().showAll());
 				break;
 			case 3:
 				vf.getCon().printLine("Ingrese el nombre de pincel a actualizar");
