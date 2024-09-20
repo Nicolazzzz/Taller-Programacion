@@ -103,8 +103,7 @@ public class PinturaDAO implements CRUDOperation<PinturaDTO, Pintura> {
 			content += pintura.getMarca() + ";";
 			content += pintura.getColor() + ";";
 			content += pintura.getContenidoMl() + ";";
-			content += pintura.isEsVinilo() + ";";
-			content += pintura.isEsOleo();
+			content += pintura.isEsVinilo();
 			content += "\n";
 		}
 		FileHandler.writeFile(FILE_NAME, content);
@@ -130,7 +129,6 @@ public class PinturaDAO implements CRUDOperation<PinturaDTO, Pintura> {
 				pin.setColor(cols[6]);
 				pin.setContenidoMl(Float.parseFloat(cols[7]));
 				pin.setEsVinilo(Boolean.parseBoolean(cols[8]));
-				pin.setEsOleo(Boolean.parseBoolean(cols[9]));
 				listaPinturas.add(pin);
 			}
 		}

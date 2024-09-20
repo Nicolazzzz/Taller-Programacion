@@ -104,8 +104,7 @@ public class DataMapper {
 	 */
 	public static Pintura pinturaDTOToPintura(PinturaDTO dto) {
 		Pintura entity = new Pintura(dto.getPrecioCompra(), dto.getPrecioVenta(), dto.getCantidad(), dto.getNombre(),
-				dto.getTamanio(), dto.getMarca(), dto.getColor(), dto.getContenidoMl(), dto.isEsVinilo(),
-				dto.isEsOleo());
+				dto.getTamanio(), dto.getMarca(), dto.getColor(), dto.getContenidoMl(), dto.isEsVinilo());
 		return entity;
 	}
 
@@ -118,7 +117,7 @@ public class DataMapper {
 	public static PinturaDTO pinturaToPinturaDTO(Pintura entity) {
 		PinturaDTO dto = new PinturaDTO(entity.getPrecioCompra(), entity.getPrecioVenta(), entity.getCantidad(),
 				entity.getNombre(), entity.getTamanio(), entity.getMarca(), entity.getColor(), entity.getContenidoMl(),
-				entity.isEsVinilo(), entity.isEsOleo());
+				entity.isEsVinilo());
 		return dto;
 	}
 
@@ -136,8 +135,7 @@ public class DataMapper {
 
 		for (PinturaDTO dto : dtoList) {
 			entityList.add(new Pintura(dto.getPrecioCompra(), dto.getPrecioVenta(), dto.getCantidad(), dto.getNombre(),
-					dto.getTamanio(), dto.getMarca(), dto.getColor(), dto.getContenidoMl(), dto.isEsVinilo(),
-					dto.isEsOleo()));
+					dto.getTamanio(), dto.getMarca(), dto.getColor(), dto.getContenidoMl(), dto.isEsVinilo()));
 		}
 
 		return entityList;
@@ -158,7 +156,7 @@ public class DataMapper {
 		for (Pintura entity : entityList) {
 			dtoList.add(new PinturaDTO(entity.getPrecioCompra(), entity.getPrecioVenta(), entity.getCantidad(),
 					entity.getNombre(), entity.getTamanio(), entity.getMarca(), entity.getColor(),
-					entity.getContenidoMl(), entity.isEsVinilo(), entity.isEsOleo()));
+					entity.getContenidoMl(), entity.isEsVinilo()));
 		}
 
 		return dtoList;

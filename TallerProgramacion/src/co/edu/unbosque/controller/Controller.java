@@ -209,11 +209,9 @@ public class Controller {
 				float contenido = vf.getCon().readFloat();
 				vf.getCon().printLine("es vinilo");
 				boolean esVinilo = vf.getCon().readBoolean();
-				vf.getCon().printLine("es oleo");
-				boolean esOleo = vf.getCon().readBoolean();
 
 				if (mf.getPinturaDAO().add(new PinturaDTO(precioCompra, precioVenta, cantidad, nombre, tamanio, marca,
-						color, contenido, esVinilo, esOleo)) == true) {
+						color, contenido, esVinilo)) == true) {
 					vf.getCon().printLine("Creado");
 				} else {
 					vf.getCon().printLine("Paila");
@@ -227,7 +225,7 @@ public class Controller {
 				vf.getCon().burnLine();
 				String name = vf.getCon().readLine();
 
-				if (mf.getPinturaDAO().find(new Pintura(0, 0, 0, name, null, null, null, 0, false, false)) == null) {
+				if (mf.getPinturaDAO().find(new Pintura(0, 0, 0, name, null, null, null, 0, false)) == null) {
 					vf.getCon().printLine("No se puede actualizar no coincide con ninguno");
 					break;
 				}
@@ -253,12 +251,10 @@ public class Controller {
 				float contenidoA = vf.getCon().readFloat();
 				vf.getCon().printLine("es vinilo");
 				boolean esViniloA = vf.getCon().readBoolean();
-				vf.getCon().printLine("es oleo");
-				boolean esOleoA = vf.getCon().readBoolean();
 
-				mf.getPinturaDAO().update(new PinturaDTO(0, 0, 0, name, null, null, null, 0, false, false),
+				mf.getPinturaDAO().update(new PinturaDTO(0, 0, 0, name, null, null, null, 0, false),
 						new PinturaDTO(precioCompraA, precioVentaA, cantidadA, nombreA, tamanioA, marcaA, colorA,
-								contenidoA, esViniloA, esOleoA));
+								contenidoA, esViniloA));
 				break;
 			case 4:
 				vf.getCon().printLine("ELIMINANDO PINTURA");
@@ -266,8 +262,7 @@ public class Controller {
 				vf.getCon().burnLine();
 				String delete = vf.getCon().readLine();
 
-				if (mf.getPinturaDAO()
-						.delete(new PinturaDTO(0, 0, 0, delete, null, null, null, 0, false, false)) == false) {
+				if (mf.getPinturaDAO().delete(new PinturaDTO(0, 0, 0, delete, null, null, null, 0, false)) == false) {
 					vf.getCon().printLine("NO COINCIDE CON NINGUN DATO DEL INVENTARIO");
 				}
 				break;

@@ -20,7 +20,6 @@ public class Pintura extends Producto implements Serializable {
 	private String color;
 	private float contenidoMl;
 	private boolean esVinilo;
-	private boolean esOleo;
 
 	/**
 	 * Constructor por defecto de la clase Pintura.
@@ -40,12 +39,12 @@ public class Pintura extends Producto implements Serializable {
 	 * @param esOleo      true si la pintura es de tipo óleo, false en caso
 	 *                    contrario.
 	 */
-	public Pintura(String color, float contenidoMl, boolean esVinilo, boolean esOleo) {
+	public Pintura(String color, float contenidoMl, boolean esVinilo) {
 		super();
 		this.color = color;
 		this.contenidoMl = contenidoMl;
 		this.esVinilo = esVinilo;
-		this.esOleo = esOleo;
+
 	}
 
 	/**
@@ -66,12 +65,12 @@ public class Pintura extends Producto implements Serializable {
 	 *                     contrario.
 	 */
 	public Pintura(double precioCompra, double precioVenta, int cantidad, String nombre, String tamanio, String marca,
-			String color, float contenidoMl, boolean esVinilo, boolean esOleo) {
+			String color, float contenidoMl, boolean esVinilo) {
 		super(precioCompra, precioVenta, cantidad, nombre, tamanio, marca);
 		this.color = color;
 		this.contenidoMl = contenidoMl;
 		this.esVinilo = esVinilo;
-		this.esOleo = esOleo;
+
 	}
 
 	/**
@@ -148,19 +147,6 @@ public class Pintura extends Producto implements Serializable {
 	 * 
 	 * @return true si la pintura es óleo, false en caso contrario.
 	 */
-	public boolean isEsOleo() {
-		return esOleo;
-	}
-
-	/**
-	 * Establece si la pintura es de tipo óleo.
-	 * 
-	 * @param esOleo true para indicar que la pintura es óleo, false en caso
-	 *               contrario.
-	 */
-	public void setEsOleo(boolean esOleo) {
-		this.esOleo = esOleo;
-	}
 
 	/**
 	 * Devuelve una representación en cadena de los atributos de la pintura,
@@ -170,8 +156,7 @@ public class Pintura extends Producto implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return super.toString() + "\nColor: " + color + "\nContenido Ml: " + contenidoMl + "\nEs Vinilo: " + esVinilo
-				+ "\nEs Oleo: " + esOleo;
+		return super.toString() + "\nColor: " + color + "\nContenido Ml: " + contenidoMl + "\nEs Vinilo: " + esVinilo;
 	}
 
 }
