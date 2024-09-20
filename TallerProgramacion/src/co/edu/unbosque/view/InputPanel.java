@@ -7,7 +7,8 @@ import javax.swing.JTextField;
 
 public class InputPanel extends JPanel {
 
-	private JLabel img;
+	private JLabel imgAddPincel, imgUpdatePincel, imgDeletePincel, imgAddPintura, imgUpdatePintura, imgRemovePintura,
+			imgAddProyecto, imgUpdateProyecto, imgRemoveProyecto;
 
 	private JButton inicioButtonInput, pincelButtonInput, pinturaButtonInput, proyectoButtonInput, addButtonInput,
 			updateButtonInput, removeButtonInput, showButtonInput;

@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 
 public class LobbyPanel extends JPanel {
 
-	private JLabel img;
+	private JLabel lobbyPincel, lobbyPintura, lobbyProyecto;
 	private JButton addButton, updateButton, removeButton, showButton, inicioButton, pincelButton, pinturaButton,
 			proyectoButton;
 
