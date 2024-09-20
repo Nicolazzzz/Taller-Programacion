@@ -12,40 +12,35 @@ public class HomePanel extends JPanel {
 	private JLabel img, ganancia, retornoPincel, retornoPintura, retornoProyecto, inversion, inversionPincel,
 			inversionPintura, inversionProyecto, inventario, inventarioPincel, inventarioPintura, inventarioProyecto;
 
-	private JButton pincelButton, pinturaButton, proyectoButton, inicio;
+	private JButton pincelButton, pinturaButton, proyectoButton;
 
 	public HomePanel() {
 		setSize(1280, 720);
 		setLayout(null);
 		setVisible(true);
 
+		pincelButton = new JButton("Pinceles");
+		pincelButton.setOpaque(true);
+		pincelButton.setBounds(10, 250, 190, 50);
+		pincelButton.setActionCommand("PINCELES");
+
+		pinturaButton = new JButton("Pinturas");
+		pinturaButton.setOpaque(true);
+		pinturaButton.setBounds(10, 305, 190, 50);
+		pinturaButton.setActionCommand("PINTURAS");
+
+		proyectoButton = new JButton("Proyectos");
+		proyectoButton.setOpaque(true);
+		proyectoButton.setBounds(10, 360, 190, 50);
+		proyectoButton.setActionCommand("PROYECTOS");
+
 		img = new JLabel();
 		ImageIcon imagenPortada1 = new ImageIcon("src/media/Inicio.png");
 		Image portadaRedimensionada = imagenPortada1.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
 		img.setIcon(new ImageIcon(portadaRedimensionada));
 		img.setBounds(0, 0, 1280, 720);
-		
-		inicio = new JButton("Inicio"); //volver al inicio
-		inicio.setOpaque(true);
-		inicio.setBounds(10, 195, 190, 50);
-		inicio.setActionCommand("INICIO");
-		
-		pincelButton = new JButton("Pinceles");
-		pincelButton.setOpaque(true);
-		pincelButton.setBounds(10, 250, 190, 50);
-		pincelButton.setActionCommand("PINCELES");
-		
-		pinturaButton = new JButton("Pinturas");
-		pinturaButton.setOpaque(true);
-		pinturaButton.setBounds(10, 305, 190, 50);
-		pinturaButton.setActionCommand("PINTURAS");
-		
-		proyectoButton = new JButton("Proyectos");
-		proyectoButton.setOpaque(true);
-		proyectoButton.setBounds(10, 360, 190, 50);
-		proyectoButton.setActionCommand("PROYECTOS");
-		
-		add(inicio);
+		img.setVisible(true);
+
 		add(pincelButton);
 		add(pinturaButton);
 		add(proyectoButton);
@@ -179,15 +174,5 @@ public class HomePanel extends JPanel {
 	public void setProyectoButton(JButton proyectoButton) {
 		this.proyectoButton = proyectoButton;
 	}
-
-	public JButton getInicio() {
-		return inicio;
-	}
-
-	public void setInicio(JButton inicio) {
-		this.inicio = inicio;
-	}
-	
-	
 
 }

@@ -9,28 +9,28 @@ import javax.swing.JPanel;
 
 public class CoverPanel extends JPanel {
 
-    private JLabel imagenPortada;
-    private JButton continuar;
+	private JLabel imagenPortada;
+	private JButton continuar;
 
-    public CoverPanel() {
-        setSize(1280, 720);
-        setLayout(null);
-        setVisible(true);
+	public CoverPanel() {
+		setSize(1280, 720);
+		setLayout(null);
+		setVisible(true);
 
-        imagenPortada = new JLabel();
-        ImageIcon imagenPortada1 = new ImageIcon("src/media/Portada.png");
-        Image portadaRedimensionada = imagenPortada1.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
-        imagenPortada.setIcon(new ImageIcon(portadaRedimensionada));
-        imagenPortada.setBounds(0, 0, 1280, 720);
-        
-        continuar = new JButton("Ingresar");
-        continuar.setOpaque(true);
-        continuar.setBounds(1030, 45, 200, 79);
-        continuar.setActionCommand("CONTINUAR");
+		continuar = new JButton("Ingresar");
+		continuar.setOpaque(true);
+		continuar.setBounds(1030, 45, 200, 79);
+		continuar.setActionCommand("CONTINUAR");
 
-        add(imagenPortada);
-        add(continuar);
-    }
+		imagenPortada = new JLabel();
+		ImageIcon imagenPortada1 = new ImageIcon("src/media/Portada.png");
+		Image portadaRedimensionada = imagenPortada1.getImage().getScaledInstance(1280, 690, Image.SCALE_SMOOTH);
+		imagenPortada.setIcon(new ImageIcon(portadaRedimensionada));
+		imagenPortada.setBounds(0, 0, 1280, 690);
+
+		add(continuar);
+		add(imagenPortada);
+	}
 
 	public JButton getContinuar() {
 		return continuar;
@@ -47,6 +47,5 @@ public class CoverPanel extends JPanel {
 	public void setImagenPortada(JLabel imagenPortada) {
 		this.imagenPortada = imagenPortada;
 	}
-    
-    
+
 }
