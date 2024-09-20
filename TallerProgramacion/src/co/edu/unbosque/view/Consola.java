@@ -2,6 +2,8 @@ package co.edu.unbosque.view;
 
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 public class Consola {
 
 	private Scanner sc;
@@ -53,6 +55,22 @@ public class Consola {
 			return false;
 		}
 
+	}
+
+	public void mostrarMensajeEmergente(String texto) {
+		JOptionPane.showMessageDialog(null, texto, "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	public void mostrarAlerta(String texto) {
+		JOptionPane.showMessageDialog(null, texto, "Alerta", JOptionPane.WARNING_MESSAGE);
+	}
+
+	public void mostrarError(String texto) {
+		JOptionPane.showMessageDialog(null, texto, "Error", JOptionPane.ERROR_MESSAGE);
+	}
+
+	public void mostrarListado(String texto) {
+		JOptionPane.showMessageDialog(null, texto, "Lista productos registrados", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 }
