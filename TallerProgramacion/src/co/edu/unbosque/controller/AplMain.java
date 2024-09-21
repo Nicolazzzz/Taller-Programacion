@@ -14,14 +14,15 @@ package co.edu.unbosque.controller;
  */
 public class AplMain {
 
-    /**
-     * El método main es el punto de entrada de la aplicación. Crea una instancia
-     * de la clase Controller, que gestiona la ejecución general del programa.
-     *
-     * @param args Argumentos de la línea de comandos (no utilizados en esta aplicación)
-     */
-    public static void main(String[] args) {
-        Controller controlador = new Controller();
-    }
+	/**
+	 * El método main es el punto de entrada de la aplicación. Crea una instancia de
+	 * la clase Controller, que gestiona la ejecución general del programa.
+	 *
+	 * @param args Argumentos de la línea de comandos (no utilizados en esta
+	 *             aplicación)
+	 */
+	public static void main(String[] args) {
+		Controller controlador = new Controller();
+	}
 
 }

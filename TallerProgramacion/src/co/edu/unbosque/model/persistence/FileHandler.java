@@ -57,7 +57,6 @@ public class FileHandler {
 	 * @param url     la ruta relativa del archivo dentro de la carpeta de datos
 	 * @param content el contenido que se escribirá en el archivo
 	 */
-
 	public static void writeFile(String url, String content) {
 		try {
 			archivo = new File(FOLDER_NAME + "/" + url);
@@ -106,8 +105,14 @@ public class FileHandler {
 		return null;
 	}
 
+	/**
+	 * Escribe un objeto en un archivo como un archivo serializado dentro de la
+	 * carpeta designada. Si el archivo no existe, lo crea.
+	 *
+	 * @param url     la ruta relativa del archivo dentro de la carpeta de datos
+	 * @param content el objeto que se escribirá en el archivo
+	 */
 	public static void writeSerialized(String url, Object content) {
-
 		try {
 			archivo = new File(FOLDER_NAME + "/" + url);
 			if (!archivo.exists()) {
@@ -124,11 +129,16 @@ public class FileHandler {
 			e.printStackTrace();
 			System.out.println("ERROR EN CREAR ARCHIVO (Serialized)");
 		}
-
 	}
 
+	/**
+	 * Lee un objeto desde un archivo que contiene un objeto serializado dentro de
+	 * la carpeta designada.
+	 *
+	 * @param url la ruta relativa del archivo dentro de la carpeta de datos
+	 * @return el objeto leído del archivo, o {@code null} si ocurre un error
+	 */
 	public static Object readSerialized(String url) {
-
 		try {
 			archivo = new File(FOLDER_NAME + "/" + url);
 			if (!archivo.exists()) {
@@ -147,8 +157,7 @@ public class FileHandler {
 		} catch (IOException e) {
 			System.out.println("ERROR EN LECTURA DE ARCHIVO (SERIALIZED)");
 		} catch (ClassNotFoundException e) {
-			System.out.println("ERROR AL LEER LOS DATOS DEL SERIALIZED(CLASS NOT FOUND");
-
+			System.out.println("ERROR AL LEER LOS DATOS DEL SERIALIZED(CLASS NOT FOUND)");
 		}
 		return null;
 	}

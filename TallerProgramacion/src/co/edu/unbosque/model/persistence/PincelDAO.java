@@ -5,21 +5,36 @@ import java.util.ArrayList;
 import co.edu.unbosque.model.Pincel;
 import co.edu.unbosque.model.PincelDTO;
 
+/**
+ * La clase {@code PincelDAO} implementa la interfaz {@code CRUDOperation} para
+ * realizar operaciones de acceso a datos sobre objetos {@code Pincel}. Esta
+ * clase maneja la persistencia de datos utilizando archivos CSV y archivos
+ * serializados.
+ * 
+ * <p>
+ * Autor: MARIO RODRIGUEZ
+ * </p>
+ * 
+ * @param <PincelDTO> el tipo de objeto de transferencia de datos
+ * @param <Pincel>    el tipo de objeto que se va a almacenar
+ */
 public class PincelDAO implements CRUDOperation<PincelDTO, Pincel> {
 
 	private ArrayList<Pincel> listaPinceles;
 	private final String FILE_NAME = "pinceles.csv";
 	private final String SERIAL_NAME = "pinceles.bat";
 
+	/**
+	 * Constructor de la clase {@code PincelDAO}. Inicializa la lista de pinceles y
+	 * verifica la existencia de la carpeta para los archivos de datos.
+	 */
 	public PincelDAO() {
 		FileHandler.checkFolder();
 		readSerialized();
-
 	}
 
 	@Override
 	public String showAll() {
-
 		String rta = "";
 		int pos = 1;
 		if (listaPinceles.isEmpty()) {
@@ -32,7 +47,6 @@ public class PincelDAO implements CRUDOperation<PincelDTO, Pincel> {
 			}
 			return rta;
 		}
-
 	}
 
 	@Override
@@ -47,7 +61,6 @@ public class PincelDAO implements CRUDOperation<PincelDTO, Pincel> {
 			writeFile();
 			writeSerialized();
 			return true;
-
 		} else {
 			return false;
 		}
@@ -55,7 +68,6 @@ public class PincelDAO implements CRUDOperation<PincelDTO, Pincel> {
 
 	@Override
 	public boolean delete(PincelDTO toDelete) {
-
 		Pincel found = find(DataMapper.pincelDTOToPincel(toDelete));
 		if (found != null) {
 			listaPinceles.remove(found);
@@ -69,15 +81,12 @@ public class PincelDAO implements CRUDOperation<PincelDTO, Pincel> {
 
 	@Override
 	public Pincel find(Pincel toFind) {
-
 		Pincel found = null;
 		if (!listaPinceles.isEmpty()) {
 			for (Pincel pincel : listaPinceles) {
 				if (pincel.getNombre().toLowerCase().equals(toFind.getNombre().toLowerCase())) {
 					found = pincel;
 					return found;
-				} else {
-					continue;
 				}
 			}
 		} else {
@@ -101,6 +110,9 @@ public class PincelDAO implements CRUDOperation<PincelDTO, Pincel> {
 		}
 	}
 
+	/**
+	 * Lee el contenido de un archivo CSV y carga los pinceles en la lista.
+	 */
 	@Override
 	public void readFile() {
 		String content = FileHandler.readFile(FILE_NAME);
@@ -110,7 +122,7 @@ public class PincelDAO implements CRUDOperation<PincelDTO, Pincel> {
 			listaPinceles = new ArrayList<>();
 			String[] rows = content.split("\n");
 			for (String row : rows) {
-				String[] cols = content.split(";");
+				String[] cols = row.split(";");
 				Pincel tmp = new Pincel();
 				tmp.setPrecioCompra(Double.parseDouble(cols[0]));
 				tmp.setPrecioVenta(Double.parseDouble(cols[1]));
@@ -122,11 +134,13 @@ public class PincelDAO implements CRUDOperation<PincelDTO, Pincel> {
 				tmp.setMaterial(cols[7]);
 				tmp.setTipoPincel(cols[8]);
 				listaPinceles.add(tmp);
-
 			}
 		}
 	}
 
+	/**
+	 * Escribe el contenido de la lista de pinceles en un archivo CSV.
+	 */
 	@Override
 	public void writeFile() {
 		String content = "";
@@ -141,28 +155,37 @@ public class PincelDAO implements CRUDOperation<PincelDTO, Pincel> {
 			content += pincel.getMaterial() + ";";
 			content += pincel.getTipoPincel();
 			content += "\n";
-
 		}
 		FileHandler.writeFile(FILE_NAME, content);
-
 	}
 
+	/**
+	 * Escribe la lista de pinceles en un archivo serializado.
+	 */
 	public void writeSerialized() {
 		FileHandler.writeSerialized(SERIAL_NAME, listaPinceles);
 	}
 
+	/**
+	 * Lee la lista de pinceles desde un archivo serializado.
+	 */
 	@SuppressWarnings("unchecked")
 	public void readSerialized() {
 		Object content = FileHandler.readSerialized(SERIAL_NAME);
 
 		if (content == null) {
 			listaPinceles = new ArrayList<>();
-
 		} else {
 			listaPinceles = (ArrayList<Pincel>) content;
 		}
 	}
 
+	/**
+	 * Calcula la inversión total basada en el precio de compra de todos los
+	 * pinceles.
+	 * 
+	 * @return la inversión total
+	 */
 	public double calculateInversion() {
 		double inversion = 0;
 		for (Pincel pincel : listaPinceles) {
@@ -171,6 +194,11 @@ public class PincelDAO implements CRUDOperation<PincelDTO, Pincel> {
 		return inversion;
 	}
 
+	/**
+	 * Calcula la ganancia total basada en el precio de venta de todos los pinceles.
+	 * 
+	 * @return la ganancia total
+	 */
 	public double calculateGanancia() {
 		double ganancia = 0;
 		for (Pincel pincel : listaPinceles) {
@@ -179,6 +207,11 @@ public class PincelDAO implements CRUDOperation<PincelDTO, Pincel> {
 		return ganancia;
 	}
 
+	/**
+	 * Calcula la cantidad total de pinceles en la lista.
+	 * 
+	 * @return la cantidad total
+	 */
 	public int calculateCantidad() {
 		int cantidad = 0;
 		for (Pincel pincel : listaPinceles) {
@@ -186,5 +219,4 @@ public class PincelDAO implements CRUDOperation<PincelDTO, Pincel> {
 		}
 		return cantidad;
 	}
-
 }

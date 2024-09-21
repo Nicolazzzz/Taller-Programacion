@@ -5,16 +5,33 @@ import java.util.ArrayList;
 import co.edu.unbosque.model.ProyectoMadera;
 import co.edu.unbosque.model.ProyectoMaderaDTO;
 
+/**
+ * La clase {@code ProyectoMaderaDAO} implementa la interfaz
+ * {@code CRUDOperation} para realizar operaciones de acceso a datos sobre
+ * objetos {@code ProyectoMadera}. Esta clase maneja la persistencia de datos
+ * utilizando archivos CSV y archivos serializados.
+ * 
+ * <p>
+ * Autor: MARIO RODRIGUEZ
+ * </p>
+ * 
+ * @param <ProyectoMaderaDTO> el tipo de objeto de transferencia de datos
+ * @param <ProyectoMadera>    el tipo de objeto que se va a almacenar
+ */
 public class ProyectoMaderaDAO implements CRUDOperation<ProyectoMaderaDTO, ProyectoMadera> {
 
 	private ArrayList<ProyectoMadera> listaMadera;
 	private final String FILE_NAME = "madera.csv";
 	private final String SERIAL_NAME = "madera.bat";
 
+	/**
+	 * Constructor de la clase {@code ProyectoMaderaDAO}. Inicializa la lista de
+	 * proyectos de madera y verifica la existencia de la carpeta para los archivos
+	 * de datos.
+	 */
 	public ProyectoMaderaDAO() {
 		FileHandler.checkFolder();
 		readSerialized();
-
 	}
 
 	@Override
@@ -71,12 +88,8 @@ public class ProyectoMaderaDAO implements CRUDOperation<ProyectoMaderaDTO, Proye
 				if (madera.getNombre().toLowerCase().equals(toFind.getNombre().toLowerCase())) {
 					found = madera;
 					return found;
-				} else {
-					continue;
 				}
 			}
-		} else {
-			return null;
 		}
 		return null;
 	}
@@ -95,6 +108,10 @@ public class ProyectoMaderaDAO implements CRUDOperation<ProyectoMaderaDTO, Proye
 		}
 	}
 
+	/**
+	 * Lee el contenido de un archivo CSV y carga los proyectos de madera en la
+	 * lista.
+	 */
 	@Override
 	public void readFile() {
 		String content = FileHandler.readFile(FILE_NAME);
@@ -104,7 +121,7 @@ public class ProyectoMaderaDAO implements CRUDOperation<ProyectoMaderaDTO, Proye
 			listaMadera = new ArrayList<>();
 			String[] rows = content.split("\n");
 			for (String row : rows) {
-				String[] cols = content.split(";");
+				String[] cols = row.split(";");
 				ProyectoMadera pm = new ProyectoMadera();
 				pm.setPrecioCompra(Double.parseDouble(cols[0]));
 				pm.setPrecioVenta(Double.parseDouble(cols[1]));
@@ -118,44 +135,54 @@ public class ProyectoMaderaDAO implements CRUDOperation<ProyectoMaderaDTO, Proye
 				listaMadera.add(pm);
 			}
 		}
-
 	}
 
+	/**
+	 * Escribe el contenido de la lista de proyectos de madera en un archivo CSV.
+	 */
 	@Override
 	public void writeFile() {
-		String content = "";
+		StringBuilder content = new StringBuilder();
 		for (ProyectoMadera pm : listaMadera) {
-			content += pm.getPrecioCompra() + ";";
-			content += pm.getPrecioVenta() + ";";
-			content += pm.getCantidad() + ";";
-			content += pm.getNombre() + ";";
-			content += pm.getTamanio() + ";";
-			content += pm.getMarca() + ";";
-			content += pm.isEsCortadoMano() + ";";
-			content += pm.isEsCortadoLaser() + ";";
-			content += pm.isEsGrabado();
+			content.append(pm.getPrecioCompra()).append(";");
+			content.append(pm.getPrecioVenta()).append(";");
+			content.append(pm.getCantidad()).append(";");
+			content.append(pm.getNombre()).append(";");
+			content.append(pm.getTamanio()).append(";");
+			content.append(pm.getMarca()).append(";");
+			content.append(pm.isEsCortadoMano()).append(";");
+			content.append(pm.isEsCortadoLaser()).append(";");
+			content.append(pm.isEsGrabado()).append("\n");
 		}
-		FileHandler.writeFile(FILE_NAME, content);
-
+		FileHandler.writeFile(FILE_NAME, content.toString());
 	}
 
+	/**
+	 * Escribe la lista de proyectos de madera en un archivo serializado.
+	 */
 	public void writeSerialized() {
 		FileHandler.writeSerialized(SERIAL_NAME, listaMadera);
 	}
 
+	/**
+	 * Lee la lista de proyectos de madera desde un archivo serializado.
+	 */
 	@SuppressWarnings("unchecked")
 	public void readSerialized() {
-
 		Object content = FileHandler.readSerialized(SERIAL_NAME);
-
 		if (content == null) {
 			listaMadera = new ArrayList<>();
 		} else {
 			listaMadera = (ArrayList<ProyectoMadera>) content;
 		}
-
 	}
 
+	/**
+	 * Calcula la inversión total basada en el precio de compra de todos los
+	 * proyectos de madera.
+	 * 
+	 * @return la inversión total
+	 */
 	public double calculateInversion() {
 		double inversion = 0;
 		for (ProyectoMadera p : listaMadera) {
@@ -164,6 +191,12 @@ public class ProyectoMaderaDAO implements CRUDOperation<ProyectoMaderaDTO, Proye
 		return inversion;
 	}
 
+	/**
+	 * Calcula la ganancia total basada en el precio de venta de todos los proyectos
+	 * de madera.
+	 * 
+	 * @return la ganancia total
+	 */
 	public double calculateGanancia() {
 		double ganancia = 0;
 		for (ProyectoMadera p : listaMadera) {
@@ -172,6 +205,11 @@ public class ProyectoMaderaDAO implements CRUDOperation<ProyectoMaderaDTO, Proye
 		return ganancia;
 	}
 
+	/**
+	 * Calcula la cantidad total de proyectos de madera en la lista.
+	 * 
+	 * @return la cantidad total
+	 */
 	public int calculateCantidad() {
 		int cantidad = 0;
 		for (ProyectoMadera p : listaMadera) {
@@ -179,5 +217,4 @@ public class ProyectoMaderaDAO implements CRUDOperation<ProyectoMaderaDTO, Proye
 		}
 		return cantidad;
 	}
-
 }

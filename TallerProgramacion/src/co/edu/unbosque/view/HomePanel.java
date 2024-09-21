@@ -10,6 +10,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+/**
+ * La clase {@code HomePanel} representa el panel principal de la aplicación,
+ * mostrando información sobre ganancias, inversiones e inventarios, así como
+ * botones para acceder a diferentes secciones.
+ * 
+ * <p>
+ * Autor: Mario Rodríguez and Nicolas
+ * </p>
+ */
 public class HomePanel extends JPanel {
 
 	private JLabel img, ganancia, retornoPincel, retornoPintura, retornoProyecto, inversion, inversionPincel,
@@ -17,6 +26,9 @@ public class HomePanel extends JPanel {
 
 	private JButton pincelButton, pinturaButton, proyectoButton;
 
+	/**
+	 * Constructor que inicializa el panel principal y sus componentes.
+	 */
 	public HomePanel() {
 		setSize(1280, 720);
 		setLayout(null);
@@ -122,130 +134,290 @@ public class HomePanel extends JPanel {
 		add(proyectoButton);
 	}
 
+	/**
+	 * Obtiene la etiqueta de la imagen de fondo.
+	 * 
+	 * @return La etiqueta de la imagen.
+	 */
 	public JLabel getImg() {
 		return img;
 	}
 
+	/**
+	 * Establece la etiqueta de la imagen de fondo.
+	 * 
+	 * @param img La etiqueta a establecer.
+	 */
 	public void setImg(JLabel img) {
 		this.img = img;
 	}
 
+	/**
+	 * Obtiene la etiqueta de ganancia.
+	 * 
+	 * @return La etiqueta de ganancia.
+	 */
 	public JLabel getGanancia() {
 		return ganancia;
 	}
 
+	/**
+	 * Establece la etiqueta de ganancia.
+	 * 
+	 * @param ganancia La etiqueta a establecer.
+	 */
 	public void setGanancia(JLabel ganancia) {
 		this.ganancia = ganancia;
 	}
 
+	/**
+	 * Obtiene la etiqueta de retorno de pincel.
+	 * 
+	 * @return La etiqueta de retorno de pincel.
+	 */
 	public JLabel getRetornoPincel() {
 		return retornoPincel;
 	}
 
+	/**
+	 * Establece la etiqueta de retorno de pincel.
+	 * 
+	 * @param retornoPincel La etiqueta a establecer.
+	 */
 	public void setRetornoPincel(JLabel retornoPincel) {
 		this.retornoPincel = retornoPincel;
 	}
 
+	/**
+	 * Obtiene la etiqueta de retorno de pintura.
+	 * 
+	 * @return La etiqueta de retorno de pintura.
+	 */
 	public JLabel getRetornoPintura() {
 		return retornoPintura;
 	}
 
+	/**
+	 * Establece la etiqueta de retorno de pintura.
+	 * 
+	 * @param retornoPintura La etiqueta a establecer.
+	 */
 	public void setRetornoPintura(JLabel retornoPintura) {
 		this.retornoPintura = retornoPintura;
 	}
 
+	/**
+	 * Obtiene la etiqueta de retorno de proyecto.
+	 * 
+	 * @return La etiqueta de retorno de proyecto.
+	 */
 	public JLabel getRetornoProyecto() {
 		return retornoProyecto;
 	}
 
+	/**
+	 * Establece la etiqueta de retorno de proyecto.
+	 * 
+	 * @param retornoProyecto La etiqueta a establecer.
+	 */
 	public void setRetornoProyecto(JLabel retornoProyecto) {
 		this.retornoProyecto = retornoProyecto;
 	}
 
+	/**
+	 * Obtiene la etiqueta de inversión total.
+	 * 
+	 * @return La etiqueta de inversión.
+	 */
 	public JLabel getInversion() {
 		return inversion;
 	}
 
+	/**
+	 * Establece la etiqueta de inversión total.
+	 * 
+	 * @param inversion La etiqueta a establecer.
+	 */
 	public void setInversion(JLabel inversion) {
 		this.inversion = inversion;
 	}
 
+	/**
+	 * Obtiene la etiqueta de inversión de pincel.
+	 * 
+	 * @return La etiqueta de inversión de pincel.
+	 */
 	public JLabel getInversionPincel() {
 		return inversionPincel;
 	}
 
+	/**
+	 * Establece la etiqueta de inversión de pincel.
+	 * 
+	 * @param inversionPincel La etiqueta a establecer.
+	 */
 	public void setInversionPincel(JLabel inversionPincel) {
 		this.inversionPincel = inversionPincel;
 	}
 
+	/**
+	 * Obtiene la etiqueta de inversión de pintura.
+	 * 
+	 * @return La etiqueta de inversión de pintura.
+	 */
 	public JLabel getInversionPintura() {
 		return inversionPintura;
 	}
 
+	/**
+	 * Establece la etiqueta de inversión de pintura.
+	 * 
+	 * @param inversionPintura La etiqueta a establecer.
+	 */
 	public void setInversionPintura(JLabel inversionPintura) {
 		this.inversionPintura = inversionPintura;
 	}
 
+	/**
+	 * Obtiene la etiqueta de inversión de proyecto.
+	 * 
+	 * @return La etiqueta de inversión de proyecto.
+	 */
 	public JLabel getInversionProyecto() {
 		return inversionProyecto;
 	}
 
+	/**
+	 * Establece la etiqueta de inversión de proyecto.
+	 * 
+	 * @param inversionProyecto La etiqueta a establecer.
+	 */
 	public void setInversionProyecto(JLabel inversionProyecto) {
 		this.inversionProyecto = inversionProyecto;
 	}
 
+	/**
+	 * Obtiene la etiqueta de inventario total.
+	 * 
+	 * @return La etiqueta de inventario.
+	 */
 	public JLabel getInventario() {
 		return inventario;
 	}
 
+	/**
+	 * Establece la etiqueta de inventario total.
+	 * 
+	 * @param inventario La etiqueta a establecer.
+	 */
 	public void setInventario(JLabel inventario) {
 		this.inventario = inventario;
 	}
 
+	/**
+	 * Obtiene la etiqueta de inventario de pincel.
+	 * 
+	 * @return La etiqueta de inventario de pincel.
+	 */
 	public JLabel getInventarioPincel() {
 		return inventarioPincel;
 	}
 
+	/**
+	 * Establece la etiqueta de inventario de pincel.
+	 * 
+	 * @param inventarioPincel La etiqueta a establecer.
+	 */
 	public void setInventarioPincel(JLabel inventarioPincel) {
 		this.inventarioPincel = inventarioPincel;
 	}
 
+	/**
+	 * Obtiene la etiqueta de inventario de pintura.
+	 * 
+	 * @return La etiqueta de inventario de pintura.
+	 */
 	public JLabel getInventarioPintura() {
 		return inventarioPintura;
 	}
 
+	/**
+	 * Establece la etiqueta de inventario de pintura.
+	 * 
+	 * @param inventarioPintura La etiqueta a establecer.
+	 */
 	public void setInventarioPintura(JLabel inventarioPintura) {
 		this.inventarioPintura = inventarioPintura;
 	}
 
+	/**
+	 * Obtiene la etiqueta de inventario de proyecto.
+	 * 
+	 * @return La etiqueta de inventario de proyecto.
+	 */
 	public JLabel getInventarioProyecto() {
 		return inventarioProyecto;
 	}
 
+	/**
+	 * Establece la etiqueta de inventario de proyecto.
+	 * 
+	 * @param inventarioProyecto La etiqueta a establecer.
+	 */
 	public void setInventarioProyecto(JLabel inventarioProyecto) {
 		this.inventarioProyecto = inventarioProyecto;
 	}
 
+	/**
+	 * Obtiene el botón de pinceles.
+	 * 
+	 * @return El botón de pinceles.
+	 */
 	public JButton getPincelButton() {
 		return pincelButton;
 	}
 
+	/**
+	 * Establece el botón de pinceles.
+	 * 
+	 * @param pincelButton El botón a establecer.
+	 */
 	public void setPincelButton(JButton pincelButton) {
 		this.pincelButton = pincelButton;
 	}
 
+	/**
+	 * Obtiene el botón de pinturas.
+	 * 
+	 * @return El botón de pinturas.
+	 */
 	public JButton getPinturaButton() {
 		return pinturaButton;
 	}
 
+	/**
+	 * Establece el botón de pinturas.
+	 * 
+	 * @param pinturaButton El botón a establecer.
+	 */
 	public void setPinturaButton(JButton pinturaButton) {
 		this.pinturaButton = pinturaButton;
 	}
 
+	/**
+	 * Obtiene el botón de proyectos.
+	 * 
+	 * @return El botón de proyectos.
+	 */
 	public JButton getProyectoButton() {
 		return proyectoButton;
 	}
 
+	/**
+	 * Establece el botón de proyectos.
+	 * 
+	 * @param proyectoButton El botón a establecer.
+	 */
 	public void setProyectoButton(JButton proyectoButton) {
 		this.proyectoButton = proyectoButton;
 	}

@@ -5,12 +5,29 @@ import java.util.ArrayList;
 import co.edu.unbosque.model.Pintura;
 import co.edu.unbosque.model.PinturaDTO;
 
+/**
+ * La clase {@code PinturaDAO} implementa la interfaz {@code CRUDOperation} para
+ * realizar operaciones de acceso a datos sobre objetos {@code Pintura}. Esta
+ * clase maneja la persistencia de datos utilizando archivos CSV y archivos
+ * serializados.
+ * 
+ * <p>
+ * Autor: MARIO RODRIGUEZ
+ * </p>
+ * 
+ * @param <PinturaDTO> el tipo de objeto de transferencia de datos
+ * @param <Pintura>    el tipo de objeto que se va a almacenar
+ */
 public class PinturaDAO implements CRUDOperation<PinturaDTO, Pintura> {
 
 	private ArrayList<Pintura> listaPinturas;
 	private final String FILE_NAME = "pinturas.csv";
 	private final String SERIAL_NAME = "pinturas.bat";
 
+	/**
+	 * Constructor de la clase {@code PinturaDAO}. Inicializa la lista de pinturas y
+	 * verifica la existencia de la carpeta para los archivos de datos.
+	 */
 	public PinturaDAO() {
 		FileHandler.checkFolder();
 		readSerialized();
@@ -63,22 +80,17 @@ public class PinturaDAO implements CRUDOperation<PinturaDTO, Pintura> {
 	}
 
 	@Override
-	public Pintura find(Pintura toFind) { // elimina por nombre
+	public Pintura find(Pintura toFind) {
 		Pintura found = null;
 		if (!listaPinturas.isEmpty()) {
 			for (Pintura pintura : listaPinturas) {
 				if (pintura.getNombre().toLowerCase().equals(toFind.getNombre().toLowerCase())) {
 					found = pintura;
 					return found;
-				} else {
-					continue;
 				}
 			}
-		} else {
-			return null;
 		}
 		return null;
-
 	}
 
 	@Override
@@ -95,6 +107,9 @@ public class PinturaDAO implements CRUDOperation<PinturaDTO, Pintura> {
 		}
 	}
 
+	/**
+	 * Escribe el contenido de la lista de pinturas en un archivo CSV.
+	 */
 	public void writeFile() {
 		String content = "";
 		for (Pintura pintura : listaPinturas) {
@@ -102,7 +117,7 @@ public class PinturaDAO implements CRUDOperation<PinturaDTO, Pintura> {
 			content += pintura.getPrecioVenta() + ";";
 			content += pintura.getCantidad() + ";";
 			content += pintura.getNombre() + ";";
-			content += pintura.getTamanio();
+			content += pintura.getTamanio() + ";";
 			content += pintura.getMarca() + ";";
 			content += pintura.getColor() + ";";
 			content += pintura.getContenidoMl() + ";";
@@ -112,6 +127,9 @@ public class PinturaDAO implements CRUDOperation<PinturaDTO, Pintura> {
 		FileHandler.writeFile(FILE_NAME, content);
 	}
 
+	/**
+	 * Lee el contenido de un archivo CSV y carga las pinturas en la lista.
+	 */
 	@Override
 	public void readFile() {
 		String content = FileHandler.readFile(FILE_NAME);
@@ -121,7 +139,7 @@ public class PinturaDAO implements CRUDOperation<PinturaDTO, Pintura> {
 			listaPinturas = new ArrayList<>();
 			String[] rows = content.split("\n");
 			for (String row : rows) {
-				String[] cols = content.split(";");
+				String[] cols = row.split(";");
 				Pintura pin = new Pintura();
 				pin.setPrecioCompra(Double.parseDouble(cols[0]));
 				pin.setPrecioVenta(Double.parseDouble(cols[1]));
@@ -137,10 +155,16 @@ public class PinturaDAO implements CRUDOperation<PinturaDTO, Pintura> {
 		}
 	}
 
+	/**
+	 * Escribe la lista de pinturas en un archivo serializado.
+	 */
 	public void writeSerialized() {
 		FileHandler.writeSerialized(SERIAL_NAME, listaPinturas);
 	}
 
+	/**
+	 * Lee la lista de pinturas desde un archivo serializado.
+	 */
 	@SuppressWarnings("unchecked")
 	public void readSerialized() {
 		Object content = FileHandler.readSerialized(SERIAL_NAME);
@@ -151,6 +175,12 @@ public class PinturaDAO implements CRUDOperation<PinturaDTO, Pintura> {
 		}
 	}
 
+	/**
+	 * Calcula la inversión total basada en el precio de compra de todas las
+	 * pinturas.
+	 * 
+	 * @return la inversión total
+	 */
 	public double calculateInversion() {
 		double inversion = 0;
 		for (Pintura p : listaPinturas) {
@@ -159,6 +189,11 @@ public class PinturaDAO implements CRUDOperation<PinturaDTO, Pintura> {
 		return inversion;
 	}
 
+	/**
+	 * Calcula la ganancia total basada en el precio de venta de todas las pinturas.
+	 * 
+	 * @return la ganancia total
+	 */
 	public double calculateGanancia() {
 		double ganancia = 0;
 		for (Pintura p : listaPinturas) {
@@ -167,6 +202,11 @@ public class PinturaDAO implements CRUDOperation<PinturaDTO, Pintura> {
 		return ganancia;
 	}
 
+	/**
+	 * Calcula la cantidad total de pinturas en la lista.
+	 * 
+	 * @return la cantidad total
+	 */
 	public int calculateCantidad() {
 		int cantidad = 0;
 		for (Pintura p : listaPinturas) {

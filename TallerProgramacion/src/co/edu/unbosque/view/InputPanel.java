@@ -1,31 +1,45 @@
 package co.edu.unbosque.view;
 
-import java.awt.Color;
 import java.awt.Image;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * Clase que representa un panel de entrada en la interfaz gráfica. Este panel
+ * incluye botones y campos de texto para gestionar pinceles, pinturas y
+ * proyectos. Proporciona la funcionalidad para agregar, actualizar, eliminar y
+ * mostrar elementos.
+ * 
+ * @author Mario Rodríguez and Nicolas
+ */
 public class InputPanel extends JPanel {
 
+	// Etiquetas para las imágenes relacionadas con pinceles, pinturas y proyectos
 	private JLabel imgAddPincel, imgUpdatePincel, imgRemovePincel, imgAddPintura, imgUpdatePintura, imgRemovePintura,
 			imgAddProyecto, imgUpdateProyecto, imgRemoveProyecto;
 
+	// Botones para la interfaz
 	private JButton inicioButtonInput, pincelButtonInput, pinturaButtonInput, proyectoButtonInput, addButtonInput,
 			updateButtonInput, removeButtonInput, showButtonInput;
 
+	// Campos de texto para ingresar datos
 	private JTextField nameField, precioCompraField, precioVentaField, cantidadField, tamanioField, marcaField,
 			propioField1, propioField2, propioField3;
 
+	/**
+	 * Constructor de la clase InputPanel. Inicializa el panel, sus botones y
+	 * etiquetas de imágenes.
+	 */
 	public InputPanel() {
-
+		// Configuración del panel
 		setSize(1280, 720);
 		setLayout(null);
 		setVisible(true);
 
+		// Inicialización y configuración de botones
 		inicioButtonInput = new JButton("Inicio"); // volver al inicio
 		inicioButtonInput.setOpaque(false);
 		inicioButtonInput.setBounds(10, 195, 190, 50);
@@ -50,30 +64,23 @@ public class InputPanel extends JPanel {
 		addButtonInput.setOpaque(false);
 		addButtonInput.setBounds(239, 75, 215, 80);
 		addButtonInput.setActionCommand("AGREGARINPUT");
-//		addButtonInput.setBackground(new Color(255, 222, 89));//AMARILLO
-//		addButtonInput.setBackground(new Color(90, 114, 126));//GRIS
 
 		updateButtonInput = new JButton("Actualizar");
 		updateButtonInput.setOpaque(false);
 		updateButtonInput.setBounds(772, 75, 215, 80);
 		updateButtonInput.setActionCommand("ACTUALIZARINPUT");
-//		updateButtonInput.setBackground(new Color(255, 222, 89));//AMARILLO
-//		updateButtonInput.setBackground(new Color(90, 114, 126));//GRIS
 
 		removeButtonInput = new JButton("Eliminar");
 		removeButtonInput.setOpaque(false);
 		removeButtonInput.setBounds(1042, 75, 215, 80);
 		removeButtonInput.setActionCommand("ELIMINARINPUT");
-//		removeButtonInput.setBackground(new Color(255, 222, 89));//AMARILLO
-//		removeButtonInput.setBackground(new Color(90, 114, 126));//GRIS
 
 		showButtonInput = new JButton("Mostrar");
 		showButtonInput.setOpaque(false);
 		showButtonInput.setBounds(505, 75, 215, 80);
 		showButtonInput.setActionCommand("MOSTRARINPUT");
-//		showButtonInput.setBackground(new Color(255, 222, 89));//AMARILLO
-//		showButtonInput.setBackground(new Color(90, 114, 126));//GRIS
 
+		// Inicialización de etiquetas de imágenes con escalado
 		imgAddPincel = new JLabel();
 		ImageIcon addPincel = new ImageIcon("src/media/AddPincel.png");
 		Image pincelA = addPincel.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
@@ -95,6 +102,7 @@ public class InputPanel extends JPanel {
 		imgRemovePincel.setBounds(0, 0, 1280, 720);
 		imgRemovePincel.setVisible(false);
 
+		// Inicialización de etiquetas de imágenes para pinturas
 		imgAddPintura = new JLabel();
 		ImageIcon imagenPortada1 = new ImageIcon("src/media/AddPintura.png");
 		Image portadaRedimensionada = imagenPortada1.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
@@ -116,6 +124,7 @@ public class InputPanel extends JPanel {
 		imgRemovePintura.setBounds(0, 0, 1280, 720);
 		imgRemovePintura.setVisible(false);
 
+		// Inicialización de etiquetas de imágenes para proyectos
 		imgAddProyecto = new JLabel();
 		ImageIcon addProyecto = new ImageIcon("src/media/AddProyecto.png");
 		Image proyectoA = addProyecto.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
@@ -137,7 +146,7 @@ public class InputPanel extends JPanel {
 		imgRemoveProyecto.setBounds(0, 0, 1280, 720);
 		imgRemoveProyecto.setVisible(false);
 
-		// TEXTFIELDS ADD
+		// Inicialización de campos de texto
 		nameField = new JTextField();
 		nameField.setBounds(248, 255, 300, 60);
 		nameField.setOpaque(true);
@@ -182,11 +191,8 @@ public class InputPanel extends JPanel {
 		propioField3.setBounds(968, 255, 290, 60);
 		propioField3.setOpaque(true);
 		propioField3.setVisible(false);
-		// AQUI ACABAN LOS TEXTFIELDS PARA ADD
 
-		// TEXTFIELDS UPDATE
-
-		// IMAGENES
+		// Agregar las imágenes al panel
 		add(imgUpdatePincel);
 		add(imgUpdatePintura);
 		add(imgUpdateProyecto);
@@ -197,7 +203,7 @@ public class InputPanel extends JPanel {
 		add(imgRemovePintura);
 		add(imgRemoveProyecto);
 
-		// BOTONES
+		// Agregar botones al panel
 		add(inicioButtonInput);
 		add(pincelButtonInput);
 		add(pinturaButtonInput);
@@ -207,8 +213,7 @@ public class InputPanel extends JPanel {
 		add(removeButtonInput);
 		add(showButtonInput);
 
-		// TEXTFIELDS
-		add(nameField);
+		// Agregar campos de texto al panel
 		add(nameField);
 		add(precioCompraField);
 		add(precioVentaField);
@@ -218,9 +223,9 @@ public class InputPanel extends JPanel {
 		add(propioField1);
 		add(propioField2);
 		add(propioField3);
-
 	}
 
+	// Métodos de acceso para las propiedades
 	public JLabel getImgAddPincel() {
 		return imgAddPincel;
 	}
@@ -428,5 +433,4 @@ public class InputPanel extends JPanel {
 	public void setPropioField3(JTextField propioField3) {
 		this.propioField3 = propioField3;
 	}
-
 }
