@@ -1,5 +1,6 @@
 package co.edu.unbosque.view;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -28,6 +29,9 @@ public class VentanaPrincipal extends JFrame {
 		setLayout(null);
 		setResizable(false);
 		setTitle("BIENVENIDA!");
+		
+		ImageIcon logoVentana = new ImageIcon("src/media/logo.jpg");
+		setIconImage(logoVentana.getImage());
 
 		homePanel = new HomePanel();
 		coverPanel = new CoverPanel();
