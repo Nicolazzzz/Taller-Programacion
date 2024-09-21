@@ -156,7 +156,8 @@ public class Pintura extends Producto implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return super.toString() + "\nColor: " + color + "\nContenido Ml: " + contenidoMl + "\nEs Vinilo: " + esVinilo;
+		return super.toString() + "\nColor: " + color + "\nContenido ML: " + contenidoMl + "ml" + "\nEs Vinilo: "
+				+ esVinilo;
 	}
 
 }

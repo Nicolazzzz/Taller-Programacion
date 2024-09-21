@@ -20,11 +20,14 @@ public class ProyectoMaderaDAO implements CRUDOperation<ProyectoMaderaDTO, Proye
 	@Override
 	public String showAll() {
 		String rta = "";
+		int pos = 1;
 		if (listaMadera.isEmpty()) {
 			return "No hay proyectos de madera creados en la lista";
 		} else {
 			for (ProyectoMadera pm : listaMadera) {
-				rta += pm + "\n";
+				rta += "Producto " + pos;
+				pos++;
+				rta += pm + "\n" + "\n";
 			}
 			return rta;
 		}
@@ -151,6 +154,30 @@ public class ProyectoMaderaDAO implements CRUDOperation<ProyectoMaderaDTO, Proye
 			listaMadera = (ArrayList<ProyectoMadera>) content;
 		}
 
+	}
+
+	public double calculateInversion() {
+		double inversion = 0;
+		for (ProyectoMadera p : listaMadera) {
+			inversion += p.getPrecioCompra();
+		}
+		return inversion;
+	}
+
+	public double calculateGanancia() {
+		double ganancia = 0;
+		for (ProyectoMadera p : listaMadera) {
+			ganancia += p.getPrecioVenta();
+		}
+		return ganancia;
+	}
+
+	public int calculateCantidad() {
+		int cantidad = 0;
+		for (ProyectoMadera p : listaMadera) {
+			cantidad += p.getCantidad();
+		}
+		return cantidad;
 	}
 
 }

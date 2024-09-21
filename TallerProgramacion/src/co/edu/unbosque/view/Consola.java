@@ -3,6 +3,8 @@ package co.edu.unbosque.view;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class Consola {
 
@@ -55,6 +57,21 @@ public class Consola {
 			return false;
 		}
 
+	}
+
+	public void mostrarMensajeEmergenteConScroll(String texto) {
+		JTextArea textArea = new JTextArea(30, 50);
+		textArea.setText(texto);
+		textArea.setWrapStyleWord(true);
+		textArea.setLineWrap(true);
+		textArea.setCaretPosition(0);
+		textArea.setEditable(false);
+
+		JScrollPane scrollPane = new JScrollPane(textArea);
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+		JOptionPane.showMessageDialog(null, scrollPane, "Listado de productos", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	public void mostrarMensajeEmergente(String texto) {

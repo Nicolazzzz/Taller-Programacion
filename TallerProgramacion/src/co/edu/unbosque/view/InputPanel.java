@@ -27,58 +27,58 @@ public class InputPanel extends JPanel {
 		setVisible(true);
 
 		inicioButtonInput = new JButton("Inicio"); // volver al inicio
-		inicioButtonInput.setOpaque(true);
+		inicioButtonInput.setOpaque(false);
 		inicioButtonInput.setBounds(10, 195, 190, 50);
 		inicioButtonInput.setActionCommand("INICIOINPUT");
 
 		pincelButtonInput = new JButton("Pinceles");
-		pincelButtonInput.setOpaque(true);
+		pincelButtonInput.setOpaque(false);
 		pincelButtonInput.setBounds(10, 250, 190, 50);
 		pincelButtonInput.setActionCommand("PINCELESINPUT");
 
 		pinturaButtonInput = new JButton("Pinturas");
-		pinturaButtonInput.setOpaque(true);
+		pinturaButtonInput.setOpaque(false);
 		pinturaButtonInput.setBounds(10, 305, 190, 50);
 		pinturaButtonInput.setActionCommand("PINTURASINPUT");
 
 		proyectoButtonInput = new JButton("Proyectos");
-		proyectoButtonInput.setOpaque(true);
+		proyectoButtonInput.setOpaque(false);
 		proyectoButtonInput.setBounds(10, 360, 190, 50);
 		proyectoButtonInput.setActionCommand("PROYECTOSINPUT");
 
 		addButtonInput = new JButton("Agregar");
-		addButtonInput.setOpaque(true);
+		addButtonInput.setOpaque(false);
 		addButtonInput.setBounds(239, 75, 215, 80);
 		addButtonInput.setActionCommand("AGREGARINPUT");
 //		addButtonInput.setBackground(new Color(255, 222, 89));//AMARILLO
 //		addButtonInput.setBackground(new Color(90, 114, 126));//GRIS
 
 		updateButtonInput = new JButton("Actualizar");
-		updateButtonInput.setOpaque(true);
+		updateButtonInput.setOpaque(false);
 		updateButtonInput.setBounds(772, 75, 215, 80);
-		updateButtonInput.setActionCommand("AGREGARINPUT");
+		updateButtonInput.setActionCommand("ACTUALIZARINPUT");
 //		updateButtonInput.setBackground(new Color(255, 222, 89));//AMARILLO
 //		updateButtonInput.setBackground(new Color(90, 114, 126));//GRIS
 
 		removeButtonInput = new JButton("Eliminar");
-		removeButtonInput.setOpaque(true);
+		removeButtonInput.setOpaque(false);
 		removeButtonInput.setBounds(1042, 75, 215, 80);
-		removeButtonInput.setActionCommand("AGREGARINPUT");
+		removeButtonInput.setActionCommand("ELIMINARINPUT");
 //		removeButtonInput.setBackground(new Color(255, 222, 89));//AMARILLO
 //		removeButtonInput.setBackground(new Color(90, 114, 126));//GRIS
 
 		showButtonInput = new JButton("Mostrar");
-		showButtonInput.setOpaque(true);
+		showButtonInput.setOpaque(false);
 		showButtonInput.setBounds(505, 75, 215, 80);
-		showButtonInput.setActionCommand("AGREGARINPUT");
+		showButtonInput.setActionCommand("MOSTRARINPUT");
 //		showButtonInput.setBackground(new Color(255, 222, 89));//AMARILLO
 //		showButtonInput.setBackground(new Color(90, 114, 126));//GRIS
 
 		imgAddPincel = new JLabel();
 		ImageIcon addPincel = new ImageIcon("src/media/AddPincel.png");
-		Image pincelA = addPincel.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
+		Image pincelA = addPincel.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
 		imgAddPincel.setIcon(new ImageIcon(pincelA));
-		imgAddPincel.setBounds(0, 0, 1280, 720);
+		imgAddPincel.setBounds(0, 0, 1270, 720);
 		imgAddPincel.setVisible(false);
 
 		imgUpdatePincel = new JLabel();
@@ -97,9 +97,9 @@ public class InputPanel extends JPanel {
 
 		imgAddPintura = new JLabel();
 		ImageIcon imagenPortada1 = new ImageIcon("src/media/AddPintura.png");
-		Image portadaRedimensionada = imagenPortada1.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
+		Image portadaRedimensionada = imagenPortada1.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
 		imgAddPintura.setIcon(new ImageIcon(portadaRedimensionada));
-		imgAddPintura.setBounds(0, 0, 1280, 720);
+		imgAddPintura.setBounds(0, 0, 1270, 720);
 		imgAddPintura.setVisible(false);
 
 		imgUpdatePintura = new JLabel();
@@ -118,9 +118,9 @@ public class InputPanel extends JPanel {
 
 		imgAddProyecto = new JLabel();
 		ImageIcon addProyecto = new ImageIcon("src/media/AddProyecto.png");
-		Image proyectoA = addProyecto.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
+		Image proyectoA = addProyecto.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
 		imgAddProyecto.setIcon(new ImageIcon(proyectoA));
-		imgAddProyecto.setBounds(0, 0, 1280, 720);
+		imgAddProyecto.setBounds(0, 0, 1270, 720);
 		imgAddProyecto.setVisible(false);
 
 		imgUpdateProyecto = new JLabel();
@@ -179,22 +179,12 @@ public class InputPanel extends JPanel {
 		propioField2.setVisible(false);
 
 		propioField3 = new JTextField();
-		propioField3.setBounds(968, 255, 300, 60);
+		propioField3.setBounds(968, 255, 290, 60);
 		propioField3.setOpaque(true);
 		propioField3.setVisible(false);
 		// AQUI ACABAN LOS TEXTFIELDS PARA ADD
 
 		// TEXTFIELDS UPDATE
-
-		// BOTONES
-		add(inicioButtonInput);
-		add(pincelButtonInput);
-		add(pinturaButtonInput);
-		add(proyectoButtonInput);
-		add(addButtonInput);
-		add(updateButtonInput);
-		add(removeButtonInput);
-		add(showButtonInput);
 
 		// IMAGENES
 		add(imgUpdatePincel);
@@ -206,6 +196,16 @@ public class InputPanel extends JPanel {
 		add(imgRemovePincel);
 		add(imgRemovePintura);
 		add(imgRemoveProyecto);
+
+		// BOTONES
+		add(inicioButtonInput);
+		add(pincelButtonInput);
+		add(pinturaButtonInput);
+		add(proyectoButtonInput);
+		add(addButtonInput);
+		add(updateButtonInput);
+		add(removeButtonInput);
+		add(showButtonInput);
 
 		// TEXTFIELDS
 		add(nameField);

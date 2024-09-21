@@ -18,7 +18,7 @@ public class CoverPanel extends JPanel {
 		setVisible(true);
 
 		continuar = new JButton("Ingresar");
-		continuar.setOpaque(true);
+		continuar.setOpaque(false);
 		continuar.setBounds(1030, 45, 200, 79);
 		continuar.setActionCommand("CONTINUAR");
 
@@ -28,8 +28,8 @@ public class CoverPanel extends JPanel {
 		imagenPortada.setIcon(new ImageIcon(portadaRedimensionada));
 		imagenPortada.setBounds(0, 0, 1280, 690);
 
-		add(continuar);
 		add(imagenPortada);
+		add(continuar);
 	}
 
 	public JButton getContinuar() {

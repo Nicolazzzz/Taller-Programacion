@@ -19,12 +19,16 @@ public class PincelDAO implements CRUDOperation<PincelDTO, Pincel> {
 
 	@Override
 	public String showAll() {
+
 		String rta = "";
+		int pos = 1;
 		if (listaPinceles.isEmpty()) {
 			return "No hay datos para mostrar";
 		} else {
 			for (Pincel pincel : listaPinceles) {
-				rta += pincel + "\n";
+				rta += "Producto " + pos;
+				pos++;
+				rta += pincel + "\n" + "\n";
 			}
 			return rta;
 		}
@@ -157,6 +161,30 @@ public class PincelDAO implements CRUDOperation<PincelDTO, Pincel> {
 		} else {
 			listaPinceles = (ArrayList<Pincel>) content;
 		}
+	}
+
+	public double calculateInversion() {
+		double inversion = 0;
+		for (Pincel pincel : listaPinceles) {
+			inversion += pincel.getPrecioCompra();
+		}
+		return inversion;
+	}
+
+	public double calculateGanancia() {
+		double ganancia = 0;
+		for (Pincel pincel : listaPinceles) {
+			ganancia += pincel.getPrecioVenta();
+		}
+		return ganancia;
+	}
+
+	public int calculateCantidad() {
+		int cantidad = 0;
+		for (Pincel pincel : listaPinceles) {
+			cantidad += pincel.getCantidad();
+		}
+		return cantidad;
 	}
 
 }

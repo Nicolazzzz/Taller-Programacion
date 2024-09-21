@@ -19,11 +19,14 @@ public class PinturaDAO implements CRUDOperation<PinturaDTO, Pintura> {
 	@Override
 	public String showAll() {
 		String rta = "";
+		int pos = 1;
 		if (listaPinturas.isEmpty()) {
 			return "No hay pinturas en la lista";
 		} else {
 			for (Pintura pintura : listaPinturas) {
-				rta += pintura + "\n";
+				rta += "Producto " + pos;
+				pos++;
+				rta += pintura + "\n" + "\n";
 			}
 			return rta;
 		}
@@ -146,5 +149,29 @@ public class PinturaDAO implements CRUDOperation<PinturaDTO, Pintura> {
 		} else {
 			listaPinturas = (ArrayList<Pintura>) content;
 		}
+	}
+
+	public double calculateInversion() {
+		double inversion = 0;
+		for (Pintura p : listaPinturas) {
+			inversion += p.getPrecioCompra();
+		}
+		return inversion;
+	}
+
+	public double calculateGanancia() {
+		double ganancia = 0;
+		for (Pintura p : listaPinturas) {
+			ganancia += p.getPrecioVenta();
+		}
+		return ganancia;
+	}
+
+	public int calculateCantidad() {
+		int cantidad = 0;
+		for (Pintura p : listaPinturas) {
+			cantidad += p.getCantidad();
+		}
+		return cantidad;
 	}
 }

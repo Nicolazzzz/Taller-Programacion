@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.InputMismatchException;
 
 import co.edu.unbosque.model.ModelFacade;
+import co.edu.unbosque.model.Pincel;
 import co.edu.unbosque.model.PincelDTO;
 import co.edu.unbosque.model.Pintura;
 import co.edu.unbosque.model.PinturaDTO;
@@ -28,20 +29,34 @@ public class Controller implements ActionListener {
 	private boolean pintura = false;
 	private boolean proyecto = false;
 
-	private boolean pincelA = false;
-	private boolean pinturaA = false;
-	private boolean proyectoA = false;
+	private boolean btnAgregar = false;
+	private boolean btnActualizar = false;
+	private boolean btnEliminar = false;
+
+	private double inversionField = 0;
+	private double inversionPincelField = 0;
+	private double inversionPinturaField = 0;
+	private double inversionProyectoField = 0;
+
+	private double gananciaField = 0;
+	private double gananciaPincelField = 0;
+	private double gananciaPinturaField = 0;
+	private double gananciaProyectoField = 0;
+
+	private int cantidadField = 0;
+	private int cantidadPincelField = 0;
+	private int cantidadPinturaField = 0;
+	private int cantidadProyectoField = 0;
+
+	private String nombreA = "";
 
 	public Controller() {
 		vf = new ViewFacade();
 		mf = new ModelFacade();
-		// asignarLectores();
-		run();
+		asignarLectores();
+		fillHomeGaps();
+		vf.getCon().mostrarMensajeEmergente("BIENVENIDA(O)!");
 
-	}
-
-	public void run() {
-		mostrarMenuPpal();
 	}
 
 	public void asignarLectores() {
@@ -84,6 +99,31 @@ public class Controller implements ActionListener {
 
 		vf.getPrincipal().getLobbyPanel().getShowButton().addActionListener(this);
 		vf.getPrincipal().getLobbyPanel().getShowButton().setActionCommand("MOSTRARLOBBY");
+
+		// INPUT
+		vf.getPrincipal().getInputPanel().getInicioButtonInput().addActionListener(this);
+		vf.getPrincipal().getInputPanel().getInicioButtonInput().setActionCommand("INICIOINPUT");
+
+		vf.getPrincipal().getInputPanel().getPincelButtonInput().addActionListener(this);
+		vf.getPrincipal().getInputPanel().getPincelButtonInput().setActionCommand("PINCELESINPUT");
+
+		vf.getPrincipal().getInputPanel().getPinturaButtonInput().addActionListener(this);
+		vf.getPrincipal().getInputPanel().getPinturaButtonInput().setActionCommand("PINTURASINPUT");
+
+		vf.getPrincipal().getInputPanel().getProyectoButtonInput().addActionListener(this);
+		vf.getPrincipal().getInputPanel().getProyectoButtonInput().setActionCommand("PROYECTOSINPUT");
+
+		vf.getPrincipal().getInputPanel().getAddButtonInput().addActionListener(this);
+		vf.getPrincipal().getInputPanel().getAddButtonInput().setActionCommand("AGREGARINPUT");
+
+		vf.getPrincipal().getInputPanel().getUpdateButtonInput().addActionListener(this);
+		vf.getPrincipal().getInputPanel().getUpdateButtonInput().setActionCommand("ACTUALIZARINPUT");
+
+		vf.getPrincipal().getInputPanel().getRemoveButtonInput().addActionListener(this);
+		vf.getPrincipal().getInputPanel().getRemoveButtonInput().setActionCommand("ELIMINARINPUT");
+
+		vf.getPrincipal().getInputPanel().getShowButtonInput().addActionListener(this);
+		vf.getPrincipal().getInputPanel().getShowButtonInput().setActionCommand("MOSTRARINPUT");
 
 	}
 
@@ -162,689 +202,625 @@ public class Controller implements ActionListener {
 			break;
 
 		case "AGREGARLOBBY":
+
+			btnAgregar = true;
+			btnActualizar = false;
+			btnEliminar = false;
+
 			setearTextInputAdd();
 			checkearBooleanLobbyToAdd();
 			vf.getPrincipal().mostrarPanelInput();
 			break;
 
 		case "ACTUALIZARLOBBY":
+			btnAgregar = false;
+			btnActualizar = true;
+			btnEliminar = false;
 			setearTextInputUpdateAndRemove();
 			checkearBooleanLobbyToUpdate();
 			vf.getPrincipal().mostrarPanelInput();
 			break;
 
 		case "ELIMINARLOBBY":
+			btnAgregar = false;
+			btnActualizar = false;
+			btnEliminar = true;
 			setearTextInputUpdateAndRemove();
 			checkearBooleanLobbyToRemove();
 			vf.getPrincipal().mostrarPanelInput();
 			break;
 
 		case "MOSTRARLOBBY":
+			mostrarProducto();
+			break;
+
+		// INPUT
+		case "INICIOINPUT":
+			vf.getPrincipal().mostrarPanelInicio();
+			break;
+
+		case "PINCELESINPUT":
+			pincel = true;
+			pintura = false;
+			proyecto = false;
+
+			checkearBooleanInicioToLobby();
+			vf.getPrincipal().mostrarPanelLobby();
+			break;
+
+		case "PINTURASINPUT":
+			pincel = false;
+			pintura = true;
+			proyecto = false;
+
+			checkearBooleanInicioToLobby();
+			vf.getPrincipal().mostrarPanelLobby();
+			break;
+
+		case "PROYECTOSINPUT":
+			pincel = false;
+			pintura = false;
+			proyecto = true;
+
+			checkearBooleanInicioToLobby();
+			vf.getPrincipal().mostrarPanelLobby();
+			break;
+
+		case "AGREGARINPUT":
+
+			if (btnAgregar == false) {
+				vf.getCon().mostrarAlerta("Opción no disponible, accede nuevamente al producto y seleccionar");
+				break;
+			} else
+				agregarProducto();
+
+			break;
+
+		case "ACTUALIZARINPUT":
+			if (btnActualizar == false) {
+				vf.getCon().mostrarAlerta("Opción no disponible, accede nuevamente al producto y seleccionar");
+				break;
+			} else
+				actualizarProducto();
+			break;
+
+		case "ELIMINARINPUT":
+			if (btnEliminar == false) {
+				vf.getCon().mostrarAlerta("Opción no disponible, accede nuevamente al producto y seleccionar");
+				break;
+			} else
+				eliminarProducto();
+			break;
+
+		case "MOSTRARINPUT":
+			mostrarProducto();
 			break;
 
 		}
 
 	}
 
-	public void mostrarMenuPpal() {
+	public void agregarProducto() {
 
-		mainloop: while (true) {
-			String menuPpal = """
+		if (pincel == true && pintura == false && proyecto == false) {
+			try {
 
-					1) Pincel
-					2) Pintura
-					3) Maderas
-					4) Salir
+				double precioCompra = Double
+						.parseDouble(vf.getPrincipal().getInputPanel().getPrecioCompraField().getText());
+				ExceptionChecker.chequearNumeroNegativo((int) precioCompra);
 
-					""";
+				double precioVenta = Double
+						.parseDouble(vf.getPrincipal().getInputPanel().getPrecioVentaField().getText());
+				ExceptionChecker.chequearNumeroNegativo((int) precioVenta);
 
-			vf.getCon().printLine(menuPpal);
-			int op = vf.getCon().readInt();
-			vf.getCon().burnLine();
-			switch (op) {
-			case 1:
-				mostrarMenuPincel();
-				break;
-			case 2:
-				mostrarMenuPintura();
-				break;
-			case 3:
-				mostrarMenuMaderas();
-				break;
-			case 4:
-				break mainloop;
+				int cantidad = Integer.parseInt(vf.getPrincipal().getInputPanel().getCantidadField().getText());
+				ExceptionChecker.chequearNumeroNegativo(cantidad);
 
-			default:
-				vf.getCon().printLine("FALTA CEREBRO LLAVE");
-				break;
+				String nombre = vf.getPrincipal().getInputPanel().getNameField().getText();
+				ExceptionChecker.chequearStringValida(nombre);
+
+				String tamanio = vf.getPrincipal().getInputPanel().getTamanioField().getText();
+				ExceptionChecker.chequearStringValida(tamanio);
+
+				String marca = vf.getPrincipal().getInputPanel().getMarcaField().getText();
+				ExceptionChecker.chequearStringValida(marca);
+
+				String grosorCerda = vf.getPrincipal().getInputPanel().getPropioField1().getText();
+				ExceptionChecker.chequearStringValida(grosorCerda);
+
+				String material = vf.getPrincipal().getInputPanel().getPropioField2().getText();
+				ExceptionChecker.chequearStringValida(material);
+
+				String tipoPincel = vf.getPrincipal().getInputPanel().getPropioField3().getText();
+				ExceptionChecker.chequearStringValida(tipoPincel);
+
+				// Si todos los valores son válidos, agregar la pintura
+				if (mf.getPincelDAO().add(new PincelDTO(precioCompra, precioVenta, cantidad, nombre, tamanio, marca,
+						grosorCerda, material, tipoPincel)) == true) {
+					vf.getCon().mostrarMensajeEmergente("Producto creado exitosamente");
+				} else {
+					vf.getCon().mostrarMensajeEmergente(
+							"No se pudo completar la operación, verifique que otro producto no tenga el mismo nombre");
+
+				}
+
+			} catch (NegativeIntNumberException e) {
+				vf.getCon().mostrarError("No puede ingresar letras / numeros negativos");
+			} catch (NotValidStringException e) {
+				vf.getCon().mostrarError("Formato de palabra no valido, no incluya caracteres especiales ni numeros");
+			} catch (InputMismatchException e) {
+				vf.getCon().mostrarError("Revise los datos numericos ingresados, solo la cantidad es numero entero");
+			} catch (NumberFormatException j) {
+				vf.getCon().mostrarError("Verifique el formato de los datos ingresados");
+			}
+		}
+
+		if (pincel == false && pintura == true && proyecto == false) {
+			try {
+
+				double precioCompra = Double
+						.parseDouble(vf.getPrincipal().getInputPanel().getPrecioCompraField().getText());
+				ExceptionChecker.chequearNumeroNegativo((int) precioCompra);
+
+				double precioVenta = Double
+						.parseDouble(vf.getPrincipal().getInputPanel().getPrecioVentaField().getText());
+				ExceptionChecker.chequearNumeroNegativo((int) precioVenta);
+
+				int cantidad = Integer.parseInt(vf.getPrincipal().getInputPanel().getCantidadField().getText());
+				ExceptionChecker.chequearNumeroNegativo(cantidad);
+
+				String nombre = vf.getPrincipal().getInputPanel().getNameField().getText();
+				ExceptionChecker.chequearStringValida(nombre);
+
+				String tamanio = vf.getPrincipal().getInputPanel().getTamanioField().getText();
+				ExceptionChecker.chequearStringValida(tamanio);
+
+				String marca = vf.getPrincipal().getInputPanel().getMarcaField().getText();
+				ExceptionChecker.chequearStringValida(marca);
+
+				String color = vf.getPrincipal().getInputPanel().getPropioField1().getText();
+				ExceptionChecker.chequearColorPintura(color);
+
+				float contenido = Float.parseFloat(vf.getPrincipal().getInputPanel().getPropioField2().getText());
+				ExceptionChecker.chequearNumeroNegativo((int) contenido);
+
+				boolean esVinilo = false;
+				if (vf.getPrincipal().getInputPanel().getPropioField3().getText().toLowerCase().equals("si"))
+					esVinilo = true;
+				else if (vf.getPrincipal().getInputPanel().getPropioField3().getText().toLowerCase().equals("no"))
+					esVinilo = false;
+				ExceptionChecker.chequearBooleanoValido(esVinilo);
+
+				if (mf.getPinturaDAO().add(new PinturaDTO(precioCompra, precioVenta, cantidad, nombre, tamanio, marca,
+						color, contenido, esVinilo)) == true) {
+					vf.getCon().mostrarMensajeEmergente("Producto creado exitosamente");
+
+				} else {
+					vf.getCon().mostrarMensajeEmergente(
+							"No se pudo completar la operación, verifique que otro producto no tenga el mismo nombre");
+
+				}
+			} catch (NegativeIntNumberException e) {
+				vf.getCon().mostrarError("No puede ingresar letras / numeros negativos");
+			} catch (NotValidStringException e) {
+				vf.getCon().mostrarError("Formato de palabra no valido, no incluya caracteres especiales ni numeros");
+			} catch (InvalidPaintColorException e) {
+				vf.getCon().mostrarError("Formato de palabra no valido, no incluya caracteres especiales ni numeros");
+			} catch (NotValidBooleanException e) {
+				vf.getCon()
+						.mostrarError("Revise los datos ingresados en campos de SI/NO, solo se admite un si o un no");
+			} catch (InputMismatchException e) {
+				vf.getCon().mostrarError("Revise los datos numericos ingresados, solo la cantidad es numero entero");
+			} catch (NumberFormatException j) {
+				vf.getCon().mostrarError("Verifique el formato de los datos ingresados");
+			}
+		}
+
+		if (pincel == false && pintura == false && proyecto == true) {
+			try {
+
+				double precioCompra = Double
+						.parseDouble(vf.getPrincipal().getInputPanel().getPrecioCompraField().getText());
+				ExceptionChecker.chequearNumeroNegativo((int) precioCompra);
+
+				double precioVenta = Double
+						.parseDouble(vf.getPrincipal().getInputPanel().getPrecioVentaField().getText());
+				ExceptionChecker.chequearNumeroNegativo((int) precioVenta);
+
+				int cantidad = Integer.parseInt(vf.getPrincipal().getInputPanel().getCantidadField().getText());
+				ExceptionChecker.chequearNumeroNegativo(cantidad);
+
+				String nombre = vf.getPrincipal().getInputPanel().getNameField().getText();
+				ExceptionChecker.chequearStringValida(nombre);
+
+				String tamanio = vf.getPrincipal().getInputPanel().getTamanioField().getText();
+				ExceptionChecker.chequearStringValida(tamanio);
+
+				String marca = vf.getPrincipal().getInputPanel().getMarcaField().getText();
+				ExceptionChecker.chequearStringValida(marca);
+
+				boolean esCortadoMano = false;
+				if (vf.getPrincipal().getInputPanel().getPropioField1().getText().toLowerCase().equals("si"))
+					esCortadoMano = true;
+				else if (vf.getPrincipal().getInputPanel().getPropioField1().getText().toLowerCase().equals("no"))
+					esCortadoMano = false;
+				ExceptionChecker.chequearBooleanoValido(esCortadoMano);
+
+				boolean esCortadoLaser = false;
+				if (vf.getPrincipal().getInputPanel().getPropioField2().getText().toLowerCase().equals("si"))
+					esCortadoLaser = true;
+				else if (vf.getPrincipal().getInputPanel().getPropioField2().getText().toLowerCase().equals("no"))
+					esCortadoLaser = false;
+				ExceptionChecker.chequearBooleanoValido(esCortadoLaser);
+
+				boolean esGrabado = false;
+				if (vf.getPrincipal().getInputPanel().getPropioField3().getText().toLowerCase().equals("si"))
+					esGrabado = true;
+				else if (vf.getPrincipal().getInputPanel().getPropioField3().getText().toLowerCase().equals("no"))
+					esGrabado = false;
+				ExceptionChecker.chequearBooleanoValido(esGrabado);
+
+				if (mf.getpMaderaDAO().add(new ProyectoMaderaDTO(precioCompra, precioVenta, cantidad, nombre, tamanio,
+						marca, esCortadoMano, esCortadoLaser, esGrabado)) == true) {
+					vf.getCon().mostrarMensajeEmergente("Producto creado exitosamente");
+				} else {
+					vf.getCon().mostrarMensajeEmergente(
+							"No se pudo completar la operación, verifique que otro producto no tenga el mismo nombre");
+				}
+			} catch (NegativeIntNumberException e) {
+				vf.getCon().mostrarError("No puede ingresar letras / numeros negativos");
+			} catch (NotValidStringException e) {
+				vf.getCon().mostrarError("Formato de palabra no valido, no incluya caracteres especiales ni numeros");
+			} catch (NotValidBooleanException e) {
+				vf.getCon()
+						.mostrarError("Revise los datos ingresados en campos de SI/NO, solo se admite un si o un no");
+			} catch (InputMismatchException e) {
+				vf.getCon().mostrarError("Revise los datos numericos ingresados, solo la cantidad es numero entero");
+			} catch (NumberFormatException j) {
+				vf.getCon().mostrarError("Verifique el formato de los datos ingresados");
 			}
 		}
 
 	}
 
-	public void mostrarMenuPincel() {
-		try {
+	public void verificarActualizarProducto() {
+		if (pincel == true && pintura == false && proyecto == false) {
+			try {
+				nombreA = vf.getPrincipal().getInputPanel().getNameField().getText();
+				ExceptionChecker.chequearStringValida(nombreA);
 
-			piLoop: while (true) {
-				String menuPince = """
+				if (mf.getPincelDAO().find(new Pincel(0, 0, 0, nombreA, null, null, null, null, null)) == null) {
+					vf.getCon().mostrarAlerta("No es posible encontrar el producto a actualizar, verifique el nombre");
+				} else {
+					vf.getCon().mostrarAlerta("Producto encontrado, ingrese los datos a actualizar");
+					setearAddPincel();
+					vf.getPrincipal().mostrarPanelInput();
+				}
+			} catch (NotValidStringException e) {
+				vf.getCon().mostrarError("Formato de palabra no valido, no incluya caracteres especiales ni numeros");
+			}
+		}
+		if (pincel == false && pintura == true && proyecto == false) {
+			try {
+				nombreA = vf.getPrincipal().getInputPanel().getNameField().getText();
+				ExceptionChecker.chequearStringValida(nombreA);
 
-						PINCELES
+				if (mf.getPinturaDAO().find(new Pintura(0, 0, 0, nombreA, null, null, null, 0, false)) == null) {
+					vf.getCon().mostrarAlerta("No es posible encontrar el producto a actualizar, verifique el nombre");
+				} else {
+					vf.getCon().mostrarAlerta("Producto encontrado, ingrese los datos a actualizar");
+					setearAddPintura();
+					vf.getPrincipal().mostrarPanelInput();
+				}
+			} catch (NotValidStringException e) {
+				vf.getCon().mostrarError("Formato de palabra no valido, no incluya caracteres especiales ni numeros");
+			}
+		}
+		if (pincel == false && pintura == false && proyecto == true) {
+			try {
 
-						1) Agregar
-						2) Mostrar
-						3) Actualizar
-						4) Eliminar
-						5) Salir
+				nombreA = vf.getPrincipal().getInputPanel().getNameField().getText();
+				ExceptionChecker.chequearStringValida(nombreA);
+				if (mf.getpMaderaDAO()
+						.find(new ProyectoMadera(0, 0, 0, nombreA, null, null, false, false, false)) == null) {
+					vf.getCon().mostrarAlerta("No es posible encontrar el producto a actualizar, verifique el nombre");
+				} else {
+					vf.getCon().mostrarAlerta("Producto encontrado, ingrese los datos a actualizar");
+					setearAddProyecto();
+					vf.getPrincipal().mostrarPanelInput();
+				}
+			} catch (NotValidStringException e) {
+				vf.getCon().mostrarError("Formato de palabra no valido, no incluya caracteres especiales ni numeros");
+			}
+		}
+	}
 
-						""";
-				vf.getCon().printLine(menuPince);
-				int op = vf.getCon().readInt();
-				vf.getCon().burnLine();
+	public void actualizarProducto() {
+		if (pincel == true && pintura == false && proyecto == false) {
+			try {
 
-				switch (op) {
-				case 1:
-					try {
-						vf.getCon().printLine("CREANDO PINTURA");
+				double precioCompraA = Double
+						.parseDouble(vf.getPrincipal().getInputPanel().getPrecioCompraField().getText());
+				ExceptionChecker.chequearNumeroNegativo((int) precioCompraA);
 
-						vf.getCon().printLine("compra");
-						double precioCompra = vf.getCon().readDouble();
-						ExceptionChecker.chequearNumeroNegativo((int) precioCompra);
+				double precioVentaA = Double
+						.parseDouble(vf.getPrincipal().getInputPanel().getPrecioVentaField().getText());
+				ExceptionChecker.chequearNumeroNegativo((int) precioVentaA);
 
-						vf.getCon().printLine("venta");
-						double precioVenta = vf.getCon().readDouble();
-						ExceptionChecker.chequearNumeroNegativo((int) precioVenta);
+				int cantidadA = Integer.parseInt(vf.getPrincipal().getInputPanel().getCantidadField().getText());
+				ExceptionChecker.chequearNumeroNegativo(cantidadA);
 
-						vf.getCon().printLine("cantidad");
-						int cantidad = vf.getCon().readInt();
-						ExceptionChecker.chequearNumeroNegativo(cantidad);
+				String nombreAA = vf.getPrincipal().getInputPanel().getNameField().getText();
+				ExceptionChecker.chequearStringValida(nombreA);
 
-						vf.getCon().burnLine();
-						vf.getCon().printLine("nombre");
-						String nombre = vf.getCon().readLine();
-						ExceptionChecker.chequearStringValida(nombre);
+				String tamanioA = vf.getPrincipal().getInputPanel().getTamanioField().getText();
+				ExceptionChecker.chequearStringValida(tamanioA);
 
-						vf.getCon().printLine("tamaño");
-						String tamanio = vf.getCon().readLine();
-						ExceptionChecker.chequearStringValida(tamanio);
+				String marcaA = vf.getPrincipal().getInputPanel().getMarcaField().getText();
+				ExceptionChecker.chequearStringValida(marcaA);
 
-						vf.getCon().printLine("marca");
-						String marca = vf.getCon().readLine();
-						ExceptionChecker.chequearStringValida(marca);
+				String grosorCerdaA = vf.getPrincipal().getInputPanel().getPropioField1().getText();
+				ExceptionChecker.chequearStringValida(grosorCerdaA);
 
-						vf.getCon().printLine("color");
-						String color = vf.getCon().readLine();
-						ExceptionChecker.chequearColorPintura(color);
+				String materialA = vf.getPrincipal().getInputPanel().getPropioField2().getText();
+				ExceptionChecker.chequearStringValida(materialA);
 
-						vf.getCon().printLine("contenido en ML");
-						float contenido = vf.getCon().readFloat();
-						ExceptionChecker.chequearNumeroNegativo((int) contenido);
+				String tipoPincelA = vf.getPrincipal().getInputPanel().getPropioField3().getText();
+				ExceptionChecker.chequearStringValida(tipoPincelA);
 
-						vf.getCon().printLine("es vinilo");
-						boolean esVinilo = vf.getCon().readBoolean();
-						ExceptionChecker.chequearBooleanoValido(esVinilo);
-
-						vf.getCon().printLine("es oleo");
-						boolean esOleo = vf.getCon().readBoolean();
-						ExceptionChecker.chequearBooleanoValido(esOleo);
-
-						// Si todos los valores son válidos, agregar la pintura
-						if (mf.getPinturaDAO().add(new PinturaDTO(precioCompra, precioVenta, cantidad, nombre, tamanio,
-								marca, color, contenido, esVinilo)) == true) {
-							vf.getCon().printLine("Creado");
-						} else {
-							vf.getCon().printLine("No se pudo crear la pintura.");
-						}
-					} catch (NegativeIntNumberException e) {
-						vf.getCon().printLine("Error: Número negativo ingresado.");
-					} catch (NotValidStringException e) {
-						vf.getCon().printLine("Error: String con caracteres inválidos.");
-					} catch (InvalidPaintColorException e) {
-						vf.getCon().printLine("Error: Color de pintura inválido.");
-					} catch (NotValidBooleanException e) {
-						vf.getCon().printLine("Error: Valor booleano no válido.");
-					} catch (InputMismatchException e) {
-						vf.getCon().printLine("Error: Entrada inválida para el contenido en ML.");
-						vf.getCon().burnLine(); // Limpiar el buffer en caso de error
-						break;
-					}
-					break;
-				case 2:
-					vf.getCon().printLine(mf.getPincelDAO().showAll());
-					break;
-				case 3:
-					try {
-						vf.getCon().printLine("Ingrese el nombre de pincel a actualizar");
-						String name = vf.getCon().readLine();
-						ExceptionChecker.chequearStringValida(name); // Validación del nombre del pincel a actualizar
-
-						vf.getCon().printLine("ACTUALIZANDO PINCEL");
-
-						vf.getCon().printLine("compra");
-						double precioCompraA = vf.getCon().readDouble();
-						ExceptionChecker.chequearNumeroNegativo((int) precioCompraA); // Validación de número negativo
-
-						vf.getCon().printLine("venta");
-						double precioVentaA = vf.getCon().readDouble();
-						ExceptionChecker.chequearNumeroNegativo((int) precioVentaA); // Validación de número negativo
-
-						vf.getCon().printLine("cantidad");
-						int cantidadA = vf.getCon().readInt();
-						ExceptionChecker.chequearNumeroNegativo(cantidadA); // Validación de número negativo
-
-						vf.getCon().burnLine();
-						vf.getCon().printLine("nombre");
-						String nombreA = vf.getCon().readLine();
-						ExceptionChecker.chequearStringValida(nombreA); // Validación de String
-
-						vf.getCon().printLine("tamaño");
-						String tamanioA = vf.getCon().readLine();
-						ExceptionChecker.chequearStringValida(tamanioA); // Validación de String
-
-						vf.getCon().printLine("marca");
-						String marcaA = vf.getCon().readLine();
-						ExceptionChecker.chequearStringValida(marcaA); // Validación de String
-
-						vf.getCon().printLine("grosor");
-						String grosorCerdaA = vf.getCon().readLine();
-						ExceptionChecker.chequearStringValida(grosorCerdaA); // Validación de String
-
-						vf.getCon().printLine("material");
-						String materialA = vf.getCon().readLine();
-						ExceptionChecker.chequearStringValida(materialA); // Validación de String
-
-						vf.getCon().printLine("tipoPincel");
-						String tipoPincelA = vf.getCon().readLine();
-						ExceptionChecker.chequearStringValida(tipoPincelA); // Validación de String
-
-						// Si todas las validaciones son exitosas, se actualiza el pincel
-						mf.getPincelDAO().update(new PincelDTO(0, 0, 0, name, null, null, null, null, null),
-								new PincelDTO(precioCompraA, precioVentaA, cantidadA, nombreA, tamanioA, marcaA,
-										grosorCerdaA, materialA, tipoPincelA));
-
-					} catch (NegativeIntNumberException e) {
-						vf.getCon().printLine("Error: Número negativo ingresado.");
-					} catch (NotValidStringException e) {
-						vf.getCon().printLine("Error: String con caracteres inválidos.");
-					} catch (InputMismatchException e) {
-						vf.getCon().printLine("Error: Entrada no válida.");
-						vf.getCon().burnLine(); // Limpiar el buffer en caso de error
-						break;
-					} catch (Exception e) {
-						vf.getCon().printLine("Ocurrió un error inesperado.");
-						e.printStackTrace();
-					} finally {
-						// Acciones que siempre deben ejecutarse, si es necesario
-					}
-
-				case 4:
-					try {
-						vf.getCon().printLine("ELIMINANDO PINCEL");
-						vf.getCon().printLine("Ingrese nombre pincel a eliminar");
-
-						// Lectura y validación del nombre
-						String delete = vf.getCon().readLine();
-						ExceptionChecker.chequearStringValida(delete); // Validación del string
-
-						// Intentar eliminar el pincel del inventario
-						if (mf.getPincelDAO()
-								.delete(new PincelDTO(0, 0, 0, delete, null, null, null, null, null)) == false) {
-							vf.getCon().printLine("NO COINCIDE CON NINGUN DATO DEL INVENTARIO");
-						}
-
-					} catch (NotValidStringException e) {
-						vf.getCon().printLine("Error: Nombre de pincel contiene caracteres inválidos.");
-					} catch (InputMismatchException e) {
-						vf.getCon().printLine("Error: Entrada no válida.");
-						vf.getCon().burnLine(); // Limpiar el buffer en caso de error
-					} catch (Exception e) {
-						vf.getCon().printLine("Ocurrió un error inesperado.");
-						e.printStackTrace();
-					} finally {
-						// Acciones que siempre deben ejecutarse, si es necesario
-					}
-
-				case 5:
-					break piLoop;
-
-				default:
-					vf.getCon().printLine("CABEZA ES LO QUE NO TIENE MANO");
-					break;
+				// Si todos los valores son válidos, agregar la pintura
+				if (mf.getPincelDAO().update(new PincelDTO(0, 0, 0, nombreA, null, null, null, null, null),
+						new PincelDTO(precioCompraA, precioVentaA, cantidadA, nombreAA, tamanioA, marcaA, grosorCerdaA,
+								materialA, tipoPincelA)) == true) {
+					vf.getCon().mostrarMensajeEmergente("Producto actualizado exitosamente");
+				} else {
+					vf.getCon().mostrarAlerta("Error inesperado, contactarse con mario o nicolas");
 				}
 
+			} catch (NegativeIntNumberException e) {
+				vf.getCon().mostrarError("No puede ingresar letras / numeros negativos");
+			} catch (NotValidStringException e) {
+				vf.getCon().mostrarError("Formato de palabra no valido, no incluya caracteres especiales ni numeros");
+			} catch (InputMismatchException e) {
+				vf.getCon().mostrarError("Revise los datos numericos ingresados, solo la cantidad es numero entero");
+			} catch (NumberFormatException j) {
+				vf.getCon().mostrarError("Verifique el formato de los datos ingresados");
 			}
-		} catch (Exception e) {
+		}
 
-			e.printStackTrace();
+		if (pincel == false && pintura == true && proyecto == false) {
+			try {
+
+				double precioCompraA = Double
+						.parseDouble(vf.getPrincipal().getInputPanel().getPrecioCompraField().getText());
+				ExceptionChecker.chequearNumeroNegativo((int) precioCompraA);
+
+				double precioVentaA = Double
+						.parseDouble(vf.getPrincipal().getInputPanel().getPrecioVentaField().getText());
+				ExceptionChecker.chequearNumeroNegativo((int) precioVentaA);
+
+				int cantidadA = Integer.parseInt(vf.getPrincipal().getInputPanel().getCantidadField().getText());
+				ExceptionChecker.chequearNumeroNegativo(cantidadA);
+
+				String nombreAA = vf.getPrincipal().getInputPanel().getNameField().getText();
+				ExceptionChecker.chequearStringValida(nombreA);
+
+				String tamanioA = vf.getPrincipal().getInputPanel().getTamanioField().getText();
+				ExceptionChecker.chequearStringValida(tamanioA);
+
+				String marcaA = vf.getPrincipal().getInputPanel().getMarcaField().getText();
+				ExceptionChecker.chequearStringValida(marcaA);
+
+				String colorA = vf.getPrincipal().getInputPanel().getPropioField1().getText();
+				ExceptionChecker.chequearColorPintura(colorA);
+
+				float contenidoA = Float.parseFloat(vf.getPrincipal().getInputPanel().getPropioField2().getText());
+				ExceptionChecker.chequearNumeroNegativo((int) contenidoA);
+
+				boolean esViniloA = false;
+				if (vf.getPrincipal().getInputPanel().getPropioField3().getText().toLowerCase().equals("si"))
+					esViniloA = true;
+				else if (vf.getPrincipal().getInputPanel().getPropioField3().getText().toLowerCase().equals("no"))
+					esViniloA = false;
+				ExceptionChecker.chequearBooleanoValido(esViniloA);
+
+				if (mf.getPinturaDAO().update(new PinturaDTO(0, 0, 0, nombreA, null, null, null, 0, false),
+						new PinturaDTO(precioCompraA, precioVentaA, cantidadA, nombreAA, tamanioA, marcaA, colorA,
+								contenidoA, esViniloA)) == true) {
+					vf.getCon().mostrarMensajeEmergente("Producto actualizado exitosamente");
+				} else {
+					vf.getCon().mostrarAlerta("Error inesperado, contactarse con mario o nicolas");
+				}
+
+			} catch (NegativeIntNumberException e) {
+				vf.getCon().mostrarError("No puede ingresar letras / numeros negativos");
+			} catch (NotValidStringException e) {
+				vf.getCon().mostrarError("Formato de palabra no valido, no incluya caracteres especiales ni numeros");
+			} catch (InvalidPaintColorException e) {
+				vf.getCon().mostrarError("Formato de palabra no valido, no incluya caracteres especiales ni numeros");
+			} catch (NotValidBooleanException e) {
+				vf.getCon()
+						.mostrarError("Revise los datos ingresados en campos de SI/NO, solo se admite un si o un no");
+			} catch (InputMismatchException e) {
+				vf.getCon().mostrarError("Revise los datos numericos ingresados, solo la cantidad es numero entero");
+			} catch (NumberFormatException j) {
+				vf.getCon().mostrarError("Verifique el formato de los datos ingresados");
+			}
+		}
+
+		if (pincel == false && pintura == false && proyecto == true) {
+			try {
+
+				double precioCompraA = Double
+						.parseDouble(vf.getPrincipal().getInputPanel().getPrecioCompraField().getText());
+				ExceptionChecker.chequearNumeroNegativo((int) precioCompraA);
+
+				double precioVentaA = Double
+						.parseDouble(vf.getPrincipal().getInputPanel().getPrecioVentaField().getText());
+				ExceptionChecker.chequearNumeroNegativo((int) precioVentaA);
+
+				int cantidadA = Integer.parseInt(vf.getPrincipal().getInputPanel().getCantidadField().getText());
+				ExceptionChecker.chequearNumeroNegativo(cantidadA);
+
+				String nombreAA = vf.getPrincipal().getInputPanel().getNameField().getText();
+				ExceptionChecker.chequearStringValida(nombreA);
+
+				String tamanioA = vf.getPrincipal().getInputPanel().getTamanioField().getText();
+				ExceptionChecker.chequearStringValida(tamanioA);
+
+				String marcaA = vf.getPrincipal().getInputPanel().getMarcaField().getText();
+				ExceptionChecker.chequearStringValida(marcaA);
+
+				boolean esCortadoManoA = false;
+				if (vf.getPrincipal().getInputPanel().getPropioField1().getText().toLowerCase().equals("si"))
+					esCortadoManoA = true;
+				else if (vf.getPrincipal().getInputPanel().getPropioField1().getText().toLowerCase().equals("no"))
+					esCortadoManoA = false;
+				ExceptionChecker.chequearBooleanoValido(esCortadoManoA);
+
+				boolean esCortadoLaserA = false;
+				if (vf.getPrincipal().getInputPanel().getPropioField2().getText().toLowerCase().equals("si"))
+					esCortadoLaserA = true;
+				else if (vf.getPrincipal().getInputPanel().getPropioField2().getText().toLowerCase().equals("no"))
+					esCortadoLaserA = false;
+				ExceptionChecker.chequearBooleanoValido(esCortadoLaserA);
+
+				boolean esGrabadoA = false;
+				if (vf.getPrincipal().getInputPanel().getPropioField3().getText().toLowerCase().equals("si"))
+					esGrabadoA = true;
+				else if (vf.getPrincipal().getInputPanel().getPropioField3().getText().toLowerCase().equals("no"))
+					esGrabadoA = false;
+				ExceptionChecker.chequearBooleanoValido(esGrabadoA);
+
+				if (mf.getpMaderaDAO().update(new ProyectoMaderaDTO(0, 0, 0, nombreA, null, null, false, false, false),
+						new ProyectoMaderaDTO(precioCompraA, precioVentaA, cantidadA, nombreAA, tamanioA, marcaA,
+								esCortadoManoA, esCortadoLaserA, esGrabadoA)) == true) {
+					vf.getCon().mostrarMensajeEmergente("Producto actualizado exitosamente");
+				} else {
+					vf.getCon().mostrarAlerta("Error inesperado, contactarse con mario o nicolas");
+				}
+
+			} catch (NegativeIntNumberException e) {
+				vf.getCon().mostrarError("No puede ingresar letras / numeros negativos");
+			} catch (NotValidStringException e) {
+				vf.getCon().mostrarError("Formato de palabra no valido, no incluya caracteres especiales ni numeros");
+			} catch (NotValidBooleanException e) {
+				vf.getCon()
+						.mostrarError("Revise los datos ingresados en campos de SI/NO, solo se admite un si o un no");
+			} catch (InputMismatchException e) {
+				vf.getCon().mostrarError("Revise los datos numericos ingresados, solo la cantidad es numero entero");
+			} catch (NumberFormatException j) {
+				vf.getCon().mostrarError("Verifique el formato de los datos ingresados");
+			}
+		}
+	}
+
+	public void eliminarProducto() {
+		if (pincel == true && pintura == false && proyecto == false) {
+			try {
+
+				String delete = vf.getPrincipal().getInputPanel().getNameField().getText();
+				ExceptionChecker.chequearStringValida(delete);
+
+				if (mf.getPincelDAO().delete(new PincelDTO(0, 0, 0, delete, null, null, null, null, null)) == false) {
+					vf.getCon().mostrarAlerta("No es posible encontrar el producto a eliminar, verifique el nombre");
+				} else {
+					vf.getCon().mostrarMensajeEmergente("Producto " + delete + " eliminado");
+				}
+			} catch (NotValidStringException e) {
+				vf.getCon().mostrarError("Formato de palabra no valido, no incluya caracteres especiales ni numeros");
+			} catch (InputMismatchException e) {
+				vf.getCon().mostrarError("Error: Entrada no válida.");
+			}
+		}
+		if (pincel == false && pintura == true && proyecto == false) {
+			try {
+
+				String delete = vf.getPrincipal().getInputPanel().getNameField().getText();
+				ExceptionChecker.chequearStringValida(delete);
+
+				if (mf.getPinturaDAO().delete(new PinturaDTO(0, 0, 0, delete, null, null, null, 0, false)) == false) {
+					vf.getCon().mostrarAlerta("No es posible encontrar el producto a eliminar, verifique el nombre");
+				} else {
+					vf.getCon().mostrarMensajeEmergente("Producto " + delete + " eliminado");
+				}
+			} catch (NotValidStringException e) {
+				vf.getCon().mostrarError("Formato de palabra no valido, no incluya caracteres especiales ni numeros");
+			} catch (InputMismatchException e) {
+				vf.getCon().mostrarError("Error: Entrada no válida.");
+			}
+		}
+		if (pincel == false && pintura == false && proyecto == true) {
+			try {
+
+				String delete = vf.getPrincipal().getInputPanel().getNameField().getText();
+				ExceptionChecker.chequearStringValida(delete);
+
+				if (mf.getpMaderaDAO()
+						.delete(new ProyectoMaderaDTO(0, 0, 0, delete, null, null, false, false, false)) == false) {
+					vf.getCon().mostrarAlerta("No es posible encontrar el producto a eliminar, verifique el nombre");
+				} else {
+					vf.getCon().mostrarMensajeEmergente("Producto " + delete + " eliminado");
+				}
+			} catch (NotValidStringException e) {
+				vf.getCon().mostrarError("Formato de palabra no valido, no incluya caracteres especiales ni numeros");
+			} catch (InputMismatchException e) {
+				vf.getCon().mostrarError("Error: Entrada no válida.");
+			}
 		}
 
 	}
 
-	public void mostrarMenuPintura() {
-		try {
-			paintLoop: while (true) {
-				String menuPintu = """
-
-						PINTURAS
-
-						1) Agregar
-						2) Mostrar
-						3) Actualizar
-						4) Eliminar
-						5) Salir
-
-						""";
-				vf.getCon().printLine(menuPintu);
-				int op = vf.getCon().readInt();
-				vf.getCon().burnLine();
-
-				switch (op) {
-				case 1:
-					try {
-						vf.getCon().printLine("CREANDO PINTURA");
-
-						vf.getCon().printLine("compra");
-						double precioCompra = vf.getCon().readDouble();
-						ExceptionChecker.chequearNumeroNegativo((int) precioCompra);
-
-						vf.getCon().printLine("venta");
-						double precioVenta = vf.getCon().readDouble();
-						ExceptionChecker.chequearNumeroNegativo((int) precioVenta);
-
-						vf.getCon().printLine("cantidad");
-						int cantidad = vf.getCon().readInt();
-						ExceptionChecker.chequearNumeroNegativo(cantidad);
-
-						vf.getCon().burnLine();
-						vf.getCon().printLine("nombre");
-						String nombre = vf.getCon().readLine();
-						ExceptionChecker.chequearStringValida(nombre);
-
-						vf.getCon().printLine("tamaño");
-						String tamanio = vf.getCon().readLine();
-						ExceptionChecker.chequearStringValida(tamanio);
-
-						vf.getCon().printLine("marca");
-						String marca = vf.getCon().readLine();
-						ExceptionChecker.chequearStringValida(marca);
-
-						vf.getCon().printLine("color");
-						String color = vf.getCon().readLine();
-						ExceptionChecker.chequearColorPintura(color);
-
-						vf.getCon().burnLine();
-						vf.getCon().printLine("contenido en ML");
-						float contenido = vf.getCon().readFloat();
-						ExceptionChecker.chequearNumeroNegativo((int) contenido);
-
-						vf.getCon().printLine("es vinilo");
-						boolean esVinilo = vf.getCon().readBoolean();
-						ExceptionChecker.chequearBooleanoValido(esVinilo);
-
-						vf.getCon().printLine("es oleo");
-						boolean esOleo = vf.getCon().readBoolean();
-						ExceptionChecker.chequearBooleanoValido(esOleo);
-
-						if (mf.getPinturaDAO().add(new PinturaDTO(precioCompra, precioVenta, cantidad, nombre, tamanio,
-								marca, color, contenido, esVinilo)) == true) {
-							vf.getCon().printLine("Creado");
-						} else {
-							vf.getCon().printLine("Paila");
-						}
-					} catch (NegativeIntNumberException e) {
-						vf.getCon().printLine("Error: Número negativo ingresado.");
-					} catch (NotValidStringException e) {
-						vf.getCon().printLine("Error: String con caracteres inválidos.");
-					} catch (InvalidPaintColorException e) {
-						vf.getCon().printLine("Error: Color de pintura inválido.");
-					} catch (NotValidBooleanException e) {
-						vf.getCon().printLine("Error: Valor booleano no válido.");
-					} catch (InputMismatchException e) {
-						vf.getCon().printLine("Error: Entrada no válida para el contenido en ML.");
-						vf.getCon().burnLine();
-					}
-					break;
-
-				case 2:
-					vf.getCon().printLine(mf.getPincelDAO().showAll());
-					break;
-
-				case 3:
-					try {
-						vf.getCon().printLine("Ingrese el nombre de pintura a actualizar");
-						String name = vf.getCon().readLine();
-						ExceptionChecker.chequearStringValida(name);
-
-						if (mf.getPinturaDAO().find(new Pintura(0, 0, 0, name, null, null, null, 0, false)) == null) {
-							vf.getCon().printLine("No se puede actualizar, no coincide con ninguno");
-							break;
-						}
-
-						vf.getCon().printLine("ACTUALIZANDO PINTURA");
-
-						vf.getCon().printLine("compra");
-						double precioCompraA = vf.getCon().readDouble();
-						ExceptionChecker.chequearNumeroNegativo((int) precioCompraA);
-
-						vf.getCon().printLine("venta");
-						double precioVentaA = vf.getCon().readDouble();
-						ExceptionChecker.chequearNumeroNegativo((int) precioVentaA);
-
-						vf.getCon().printLine("cantidad");
-						int cantidadA = vf.getCon().readInt();
-						ExceptionChecker.chequearNumeroNegativo(cantidadA);
-
-						vf.getCon().burnLine();
-						vf.getCon().printLine("nombre");
-						String nombreA = vf.getCon().readLine();
-						ExceptionChecker.chequearStringValida(nombreA);
-
-						vf.getCon().printLine("tamaño");
-						String tamanioA = vf.getCon().readLine();
-						ExceptionChecker.chequearStringValida(tamanioA);
-
-						vf.getCon().printLine("marca");
-						String marcaA = vf.getCon().readLine();
-						ExceptionChecker.chequearStringValida(marcaA);
-
-						vf.getCon().printLine("color");
-						String colorA = vf.getCon().readLine();
-						ExceptionChecker.chequearColorPintura(colorA);
-
-						vf.getCon().burnLine();
-						vf.getCon().printLine("contenido en ML");
-						float contenidoA = vf.getCon().readFloat();
-						ExceptionChecker.chequearNumeroNegativo((int) contenidoA);
-
-						vf.getCon().printLine("es vinilo");
-						boolean esViniloA = vf.getCon().readBoolean();
-						ExceptionChecker.chequearBooleanoValido(esViniloA);
-
-						mf.getPinturaDAO().update(new PinturaDTO(0, 0, 0, name, null, null, null, 0, false),
-								new PinturaDTO(precioCompraA, precioVentaA, cantidadA, nombreA, tamanioA, marcaA,
-										colorA, contenidoA, esViniloA));
-
-					} catch (NegativeIntNumberException e) {
-						vf.getCon().printLine("Error: Número negativo ingresado.");
-					} catch (NotValidStringException e) {
-						vf.getCon().printLine("Error: String con caracteres inválidos.");
-					} catch (InvalidPaintColorException e) {
-						vf.getCon().printLine("Error: Color de pintura inválido.");
-					} catch (NotValidBooleanException e) {
-						vf.getCon().printLine("Error: Valor booleano no válido.");
-					} catch (InputMismatchException e) {
-						vf.getCon().printLine("Error: Entrada no válida.");
-						vf.getCon().burnLine();
-					}
-					break;
-
-				case 4:
-					try {
-						vf.getCon().printLine("ELIMINANDO PINTURA");
-						vf.getCon().printLine("Ingrese nombre pintura a eliminar");
-
-						String delete = vf.getCon().readLine();
-						ExceptionChecker.chequearStringValida(delete);
-
-						if (mf.getPinturaDAO()
-								.delete(new PinturaDTO(0, 0, 0, delete, null, null, null, 0, false)) == false) {
-							vf.getCon().printLine("NO COINCIDE CON NINGUN DATO DEL INVENTARIO");
-						}
-					} catch (NotValidStringException e) {
-						vf.getCon().printLine("Error: Nombre de pintura contiene caracteres inválidos.");
-					} catch (InputMismatchException e) {
-						vf.getCon().printLine("Error: Entrada no válida.");
-						vf.getCon().burnLine();
-					}
-					break;
-
-				case 5:
-					break paintLoop;
-
-				default:
-					vf.getCon().printLine("CABEZA ES LO QUE NO TIENE MANO");
-					break;
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+	public void mostrarProducto() {
+		if (pincel == true && pintura == false && proyecto == false) {
+			vf.getCon().mostrarMensajeEmergenteConScroll(mf.getPincelDAO().showAll());
 		}
-
-	}
-
-	public void mostrarMenuMaderas() {
-		try {
-			woodLoop: while (true) {
-				String menuMadera = """
-
-						MADERAS
-
-						1) Agregar
-						2) Mostrar
-						3) Actualizar
-						4) Eliminar
-						5) Salir
-
-						""";
-				vf.getCon().printLine(menuMadera);
-				int op = vf.getCon().readInt();
-				vf.getCon().burnLine();
-
-				switch (op) {
-				case 1:
-					try {
-						vf.getCon().printLine("CREANDO P MADERA");
-
-						vf.getCon().printLine("compra");
-						double precioCompra = vf.getCon().readDouble();
-						ExceptionChecker.chequearNumeroNegativo((int) precioCompra);
-
-						vf.getCon().printLine("venta");
-						double precioVenta = vf.getCon().readDouble();
-						ExceptionChecker.chequearNumeroNegativo((int) precioVenta);
-
-						vf.getCon().printLine("cantidad");
-						int cantidad = vf.getCon().readInt();
-						ExceptionChecker.chequearNumeroNegativo(cantidad);
-
-						vf.getCon().burnLine();
-						vf.getCon().printLine("nombre");
-						String nombre = vf.getCon().readLine();
-						ExceptionChecker.chequearStringValida(nombre);
-
-						vf.getCon().printLine("tamaño");
-						String tamanio = vf.getCon().readLine();
-						ExceptionChecker.chequearStringValida(tamanio);
-
-						vf.getCon().printLine("marca");
-						String marca = vf.getCon().readLine();
-						ExceptionChecker.chequearStringValida(marca);
-
-						vf.getCon().printLine("Es cortado mano");
-						boolean esCortadoMano = vf.getCon().readBoolean();
-						ExceptionChecker.chequearBooleanoValido(esCortadoMano);
-
-						vf.getCon().printLine("Es cortado laser");
-						boolean esCortadoLaser = vf.getCon().readBoolean();
-						ExceptionChecker.chequearBooleanoValido(esCortadoLaser);
-
-						vf.getCon().printLine("Es grabado");
-						boolean esGrabado = vf.getCon().readBoolean();
-						ExceptionChecker.chequearBooleanoValido(esGrabado);
-
-						if (mf.getpMaderaDAO().add(new ProyectoMaderaDTO(precioCompra, precioVenta, cantidad, nombre,
-								tamanio, marca, esCortadoMano, esCortadoLaser, esGrabado)) == true) {
-							vf.getCon().printLine("Creado");
-						} else {
-							vf.getCon().printLine("Paila");
-						}
-					} catch (NegativeIntNumberException e) {
-						vf.getCon().printLine("Error: Número negativo ingresado.");
-					} catch (NotValidStringException e) {
-						vf.getCon().printLine("Error: String con caracteres inválidos.");
-					} catch (NotValidBooleanException e) {
-						vf.getCon().printLine("Error: Valor booleano no válido.");
-					} catch (InputMismatchException e) {
-						vf.getCon().printLine("Error: Entrada no válida para un número.");
-						vf.getCon().burnLine();
-					}
-					break;
-
-				case 2:
-					vf.getCon().printLine(mf.getPincelDAO().showAll());
-					break;
-
-				case 3:
-					try {
-						vf.getCon().printLine("Ingrese el nombre de la madera a actualizar");
-						String name = vf.getCon().readLine();
-						ExceptionChecker.chequearStringValida(name);
-
-						if (mf.getpMaderaDAO()
-								.find(new ProyectoMadera(0, 0, 0, name, null, null, false, false, false)) == null) {
-							vf.getCon().printLine("No se puede actualizar, no coincide con ninguno");
-							break;
-						}
-
-						vf.getCon().printLine("ACTUALIZANDO MADERA");
-
-						vf.getCon().printLine("compra");
-						double precioCompraA = vf.getCon().readDouble();
-						ExceptionChecker.chequearNumeroNegativo((int) precioCompraA);
-
-						vf.getCon().printLine("venta");
-						double precioVentaA = vf.getCon().readDouble();
-						ExceptionChecker.chequearNumeroNegativo((int) precioVentaA);
-
-						vf.getCon().printLine("cantidad");
-						int cantidadA = vf.getCon().readInt();
-						ExceptionChecker.chequearNumeroNegativo(cantidadA);
-
-						vf.getCon().burnLine();
-						vf.getCon().printLine("nombre");
-						String nombreA = vf.getCon().readLine();
-						ExceptionChecker.chequearStringValida(nombreA);
-
-						vf.getCon().printLine("tamaño");
-						String tamanioA = vf.getCon().readLine();
-						ExceptionChecker.chequearStringValida(tamanioA);
-
-						vf.getCon().printLine("marca");
-						String marcaA = vf.getCon().readLine();
-						ExceptionChecker.chequearStringValida(marcaA);
-
-						vf.getCon().printLine("Es cortado mano");
-						boolean esCortadoManoA = vf.getCon().readBoolean();
-						ExceptionChecker.chequearBooleanoValido(esCortadoManoA);
-
-						vf.getCon().printLine("Es cortado laser");
-						boolean esCortadoLaserA = vf.getCon().readBoolean();
-						ExceptionChecker.chequearBooleanoValido(esCortadoLaserA);
-
-						vf.getCon().printLine("Es grabado");
-						boolean esGrabadoA = vf.getCon().readBoolean();
-						ExceptionChecker.chequearBooleanoValido(esGrabadoA);
-
-						mf.getpMaderaDAO().update(new ProyectoMaderaDTO(0, 0, 0, name, null, null, false, false, false),
-								new ProyectoMaderaDTO(precioCompraA, precioVentaA, cantidadA, nombreA, tamanioA, marcaA,
-										esCortadoManoA, esCortadoLaserA, esGrabadoA));
-
-					} catch (NegativeIntNumberException e) {
-						vf.getCon().printLine("Error: Número negativo ingresado.");
-					} catch (NotValidStringException e) {
-						vf.getCon().printLine("Error: String con caracteres inválidos.");
-					} catch (NotValidBooleanException e) {
-						vf.getCon().printLine("Error: Valor booleano no válido.");
-					} catch (InputMismatchException e) {
-						vf.getCon().printLine("Error: Entrada no válida para un número.");
-						vf.getCon().burnLine();
-					}
-					break;
-
-				case 4:
-					try {
-						vf.getCon().printLine("ELIMINANDO MADERA");
-						vf.getCon().printLine("Ingrese nombre de la madera a eliminar");
-
-						String delete = vf.getCon().readLine();
-						ExceptionChecker.chequearStringValida(delete);
-
-						if (mf.getpMaderaDAO().delete(
-								new ProyectoMaderaDTO(0, 0, 0, delete, null, null, false, false, false)) == false) {
-							vf.getCon().printLine("NO COINCIDE CON NINGUN DATO DEL INVENTARIO");
-						}
-					} catch (NotValidStringException e) {
-						vf.getCon().printLine("Error: Nombre de la madera contiene caracteres inválidos.");
-					} catch (InputMismatchException e) {
-						vf.getCon().printLine("Error: Entrada no válida.");
-						vf.getCon().burnLine();
-					}
-					break;
-
-				case 5:
-					break woodLoop;
-
-				default:
-					vf.getCon().printLine("CABEZA ES LO QUE NO TIENE MANO");
-					break;
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		if (pincel == false && pintura == true && proyecto == false) {
+			vf.getCon().mostrarMensajeEmergenteConScroll(mf.getPinturaDAO().showAll());
+		}
+		if (pincel == false && pintura == false && proyecto == true) {
+			vf.getCon().mostrarMensajeEmergenteConScroll(mf.getpMaderaDAO().showAll());
 		}
 	}
 
 	public void checkearBooleanInicioToLobby() {
-
 		if (pincel == true && pintura == false && proyecto == false) {
 			vf.getPrincipal().getLobbyPanel().getLobbyPincel().setVisible(true);
 			vf.getPrincipal().getLobbyPanel().getLobbyPintura().setVisible(false);
 			vf.getPrincipal().getLobbyPanel().getLobbyProyecto().setVisible(false);
-
 		}
-
 		if (pincel == false && pintura == true && proyecto == false) {
 			vf.getPrincipal().getLobbyPanel().getLobbyPincel().setVisible(false);
 			vf.getPrincipal().getLobbyPanel().getLobbyPintura().setVisible(true);
 			vf.getPrincipal().getLobbyPanel().getLobbyProyecto().setVisible(false);
-
 		}
 		if (pincel == false && pintura == false && proyecto == true) {
 			vf.getPrincipal().getLobbyPanel().getLobbyPincel().setVisible(false);
 			vf.getPrincipal().getLobbyPanel().getLobbyPintura().setVisible(false);
 			vf.getPrincipal().getLobbyPanel().getLobbyProyecto().setVisible(true);
-
 		}
 
 	}
 
 	public void checkearBooleanLobbyToAdd() {
-
 		if (pincel == true && pintura == false && proyecto == false)
 			setearAddPincel();
-
 		if (pincel == false && pintura == true && proyecto == false)
 			setearAddPintura();
-
 		if (pincel == false && pintura == false && proyecto == true)
 			setearAddProyecto();
-
 	}
 
 	public void checkearBooleanLobbyToUpdate() {
-
 		if (pincel == true && pintura == false && proyecto == false)
 			setearUpdatePincel();
-
 		if (pincel == false && pintura == true && proyecto == false)
 			setearUpdatePintura();
-
 		if (pincel == false && pintura == false && proyecto == true)
 			setearUpdateProyecto();
-
 	}
 
 	public void checkearBooleanLobbyToRemove() {
-
 		if (pincel == true && pintura == false && proyecto == false) {
 			setearRemovePincel();
 		}
@@ -853,7 +829,6 @@ public class Controller implements ActionListener {
 		}
 		if (pincel == false && pintura == false && proyecto == true) {
 			setearRemoveProyecto();
-
 		}
 
 	}
@@ -1006,6 +981,50 @@ public class Controller implements ActionListener {
 		vf.getPrincipal().getInputPanel().getImgRemovePincel().setVisible(false);
 		vf.getPrincipal().getInputPanel().getImgRemovePintura().setVisible(false);
 		vf.getPrincipal().getInputPanel().getImgRemoveProyecto().setVisible(true);
+
+	}
+
+	public void fillHomeGaps() {
+
+		// PINCEL
+		inversionPincelField = mf.getPincelDAO().calculateInversion();
+		gananciaPincelField = mf.getPincelDAO().calculateGanancia();
+		cantidadPincelField = mf.getPincelDAO().calculateCantidad();
+
+		// PINTURA
+		inversionPinturaField = mf.getPinturaDAO().calculateInversion();
+		gananciaPinturaField = mf.getPinturaDAO().calculateGanancia();
+		cantidadPinturaField = mf.getPinturaDAO().calculateCantidad();
+
+		// PROYECTO
+		inversionProyectoField = mf.getpMaderaDAO().calculateInversion();
+		gananciaProyectoField = mf.getpMaderaDAO().calculateGanancia();
+		cantidadProyectoField = mf.getpMaderaDAO().calculateCantidad();
+
+		// TODOS
+		inversionField = inversionPincelField + inversionPinturaField + inversionProyectoField;
+		gananciaField = gananciaPincelField + gananciaPinturaField + gananciaProyectoField;
+		cantidadField = cantidadPincelField + cantidadPinturaField + cantidadProyectoField;
+
+		// TODOS
+		vf.getPrincipal().getHomePanel().getInversion().setText(String.valueOf(inversionField));
+		vf.getPrincipal().getHomePanel().getGanancia().setText(String.valueOf(gananciaField));
+		vf.getPrincipal().getHomePanel().getInventario().setText(String.valueOf(cantidadField));
+
+		// PINCEL
+		vf.getPrincipal().getHomePanel().getInversionPincel().setText(String.valueOf(inversionPincelField));
+		vf.getPrincipal().getHomePanel().getRetornoPincel().setText(String.valueOf(gananciaPincelField));
+		vf.getPrincipal().getHomePanel().getInventarioPincel().setText(String.valueOf(cantidadPincelField));
+
+		// PINTURA
+		vf.getPrincipal().getHomePanel().getInversionPintura().setText(String.valueOf(inversionPinturaField));
+		vf.getPrincipal().getHomePanel().getRetornoPintura().setText(String.valueOf(gananciaPinturaField));
+		vf.getPrincipal().getHomePanel().getInventarioPintura().setText(String.valueOf(cantidadPinturaField));
+
+		// PROYECTO
+		vf.getPrincipal().getHomePanel().getInversionProyecto().setText(String.valueOf(inversionProyectoField));
+		vf.getPrincipal().getHomePanel().getRetornoProyecto().setText(String.valueOf(gananciaProyectoField));
+		vf.getPrincipal().getHomePanel().getInventarioProyecto().setText(String.valueOf(cantidadProyectoField));
 
 	}
 
