@@ -1,5 +1,6 @@
 package co.edu.unbosque.view;
 
+import java.awt.Color;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -26,94 +27,6 @@ public class Consola {
 	}
 
 	/**
-	 * Imprime una línea de texto en la consola.
-	 * 
-	 * @param txt El texto a imprimir.
-	 */
-	public void printLine(String txt) {
-		System.out.println(txt);
-	}
-
-	/**
-	 * Imprime un texto en la misma línea de la consola.
-	 * 
-	 * @param txt El texto a imprimir.
-	 */
-	public void printWord(String txt) {
-		System.out.print(txt);
-	}
-
-	/**
-	 * Lee la siguiente línea de entrada del usuario y la consume.
-	 */
-	public void burnLine() {
-		sc.nextLine();
-	}
-
-	/**
-	 * Lee un número entero de la entrada del usuario.
-	 * 
-	 * @return El número entero ingresado.
-	 */
-	public int readInt() {
-		return sc.nextInt();
-	}
-
-	/**
-	 * Lee un número decimal de la entrada del usuario.
-	 * 
-	 * @return El número decimal ingresado.
-	 */
-	public double readDouble() {
-		return sc.nextDouble();
-	}
-
-	/**
-	 * Lee un número de punto flotante de la entrada del usuario.
-	 * 
-	 * @return El número de punto flotante ingresado.
-	 */
-	public float readFloat() {
-		return sc.nextFloat();
-	}
-
-	/**
-	 * Lee una línea completa de texto ingresada por el usuario.
-	 * 
-	 * @return La línea de texto ingresada.
-	 */
-	public String readLine() {
-		return sc.nextLine();
-	}
-
-	/**
-	 * Lee una palabra ingresada por el usuario.
-	 * 
-	 * @return La palabra ingresada.
-	 */
-	public String readWord() {
-		return sc.nextLine();
-	}
-
-	/**
-	 * Lee un valor booleano de la entrada del usuario.
-	 * 
-	 * @return {@code true} si el usuario ingresa "si", {@code false} si ingresa
-	 *         "no".
-	 */
-	public boolean readBoolean() {
-		String contenido = sc.next();
-
-		if (contenido.toLowerCase().equals("si")) {
-			return true;
-		} else if (contenido.toLowerCase().equals("no")) {
-			return false;
-		} else {
-			return false;
-		}
-	}
-
-	/**
 	 * Muestra un mensaje emergente con desplazamiento para texto largo.
 	 * 
 	 * @param texto El texto a mostrar en el cuadro de diálogo.
@@ -125,6 +38,10 @@ public class Consola {
 		textArea.setLineWrap(true);
 		textArea.setCaretPosition(0);
 		textArea.setEditable(false);
+
+		// Set dark background and light text color
+		textArea.setBackground(Color.DARK_GRAY);
+		textArea.setForeground(Color.WHITE);
 
 		JScrollPane scrollPane = new JScrollPane(textArea);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
