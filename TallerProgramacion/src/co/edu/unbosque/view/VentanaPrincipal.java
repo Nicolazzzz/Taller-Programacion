@@ -28,11 +28,11 @@ public class VentanaPrincipal extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(null);
 		setResizable(false);
+
 		setTitle("BIENVENIDA!");
 		
 		ImageIcon logoVentana = new ImageIcon("src/media/logo.jpg");
 		setIconImage(logoVentana.getImage());
-
 		homePanel = new HomePanel();
 		coverPanel = new CoverPanel();
 		inputPanel = new InputPanel();
