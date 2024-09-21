@@ -36,6 +36,7 @@ public class Controller implements ActionListener {
 	private boolean pincel = false;
 	private boolean pintura = false;
 	private boolean proyecto = false;
+	private boolean actualizar = false;
 
 	private boolean btnAgregar = false;
 	private boolean btnActualizar = false;
@@ -225,10 +226,10 @@ public class Controller implements ActionListener {
 			break;
 
 		case "AGREGARLOBBY":
-
 			btnAgregar = true;
 			btnActualizar = false;
 			btnEliminar = false;
+			actualizar = false;
 
 			setearTextInputAdd();
 			checkearBooleanLobbyToAdd();
@@ -239,6 +240,8 @@ public class Controller implements ActionListener {
 			btnAgregar = false;
 			btnActualizar = true;
 			btnEliminar = false;
+			actualizar = false;
+
 			setearTextInputUpdateAndRemove();
 			checkearBooleanLobbyToUpdate();
 			vf.getPrincipal().mostrarPanelInput();
@@ -248,12 +251,15 @@ public class Controller implements ActionListener {
 			btnAgregar = false;
 			btnActualizar = false;
 			btnEliminar = true;
+			actualizar = false;
+
 			setearTextInputUpdateAndRemove();
 			checkearBooleanLobbyToRemove();
 			vf.getPrincipal().mostrarPanelInput();
 			break;
 
 		case "MOSTRARLOBBY":
+
 			mostrarProducto();
 			break;
 
@@ -291,28 +297,41 @@ public class Controller implements ActionListener {
 
 		case "AGREGARINPUT":
 
-			if (btnAgregar == false) {
-				vf.getCon().mostrarAlerta("Opción no disponible, accede nuevamente al producto y seleccionar");
-				break;
-			} else
-				agregarProducto();
+			if (actualizar == true) {
+				actualizarProducto();
+			} else {
 
+				if (btnAgregar == false) {
+					vf.getCon().mostrarAlerta("Opción no disponible, accede nuevamente al producto y seleccionar");
+					break;
+				} else
+					agregarProducto();
+			}
+			fillHomeGaps();
 			break;
 
 		case "ACTUALIZARINPUT":
+
 			if (btnActualizar == false) {
 				vf.getCon().mostrarAlerta("Opción no disponible, accede nuevamente al producto y seleccionar");
 				break;
-			} else
-				actualizarProducto();
+			} else {
+				verificarActualizarProducto();
+				actualizar = true;
+
+			}
+
+			fillHomeGaps();
 			break;
 
 		case "ELIMINARINPUT":
+
 			if (btnEliminar == false) {
 				vf.getCon().mostrarAlerta("Opción no disponible, accede nuevamente al producto y seleccionar");
 				break;
 			} else
 				eliminarProducto();
+			fillHomeGaps();
 			break;
 
 		case "MOSTRARINPUT":
@@ -365,6 +384,7 @@ public class Controller implements ActionListener {
 				if (mf.getPincelDAO().add(new PincelDTO(precioCompra, precioVenta, cantidad, nombre, tamanio, marca,
 						grosorCerda, material, tipoPincel)) == true) {
 					vf.getCon().mostrarMensajeEmergente("Producto creado exitosamente");
+					clearFields();
 				} else {
 					vf.getCon().mostrarMensajeEmergente(
 							"No se pudo completar la operación, verifique que otro producto no tenga el mismo nombre");
@@ -421,7 +441,7 @@ public class Controller implements ActionListener {
 				if (mf.getPinturaDAO().add(new PinturaDTO(precioCompra, precioVenta, cantidad, nombre, tamanio, marca,
 						color, contenido, esVinilo)) == true) {
 					vf.getCon().mostrarMensajeEmergente("Producto creado exitosamente");
-
+					clearFields();
 				} else {
 					vf.getCon().mostrarMensajeEmergente(
 							"No se pudo completar la operación, verifique que otro producto no tenga el mismo nombre");
@@ -490,6 +510,7 @@ public class Controller implements ActionListener {
 				if (mf.getpMaderaDAO().add(new ProyectoMaderaDTO(precioCompra, precioVenta, cantidad, nombre, tamanio,
 						marca, esCortadoMano, esCortadoLaser, esGrabado)) == true) {
 					vf.getCon().mostrarMensajeEmergente("Producto creado exitosamente");
+					clearFields();
 				} else {
 					vf.getCon().mostrarMensajeEmergente(
 							"No se pudo completar la operación, verifique que otro producto no tenga el mismo nombre");
@@ -522,9 +543,16 @@ public class Controller implements ActionListener {
 
 				if (mf.getPincelDAO().find(new Pincel(0, 0, 0, nombreA, null, null, null, null, null)) == null) {
 					vf.getCon().mostrarAlerta("No es posible encontrar el producto a actualizar, verifique el nombre");
+					actualizar = false;
 				} else {
+					clearFields();
 					vf.getCon().mostrarAlerta("Producto encontrado, ingrese los datos a actualizar");
 					setearAddPincel();
+					actualizar = true;
+					btnAgregar = true;
+					btnActualizar = false;
+					btnEliminar = false;
+					setearTextInputAdd();
 					vf.getPrincipal().mostrarPanelInput();
 				}
 			} catch (NotValidStringException e) {
@@ -538,9 +566,17 @@ public class Controller implements ActionListener {
 
 				if (mf.getPinturaDAO().find(new Pintura(0, 0, 0, nombreA, null, null, null, 0, false)) == null) {
 					vf.getCon().mostrarAlerta("No es posible encontrar el producto a actualizar, verifique el nombre");
+					actualizar = false;
+
 				} else {
+					clearFields();
 					vf.getCon().mostrarAlerta("Producto encontrado, ingrese los datos a actualizar");
 					setearAddPintura();
+					actualizar = true;
+					btnAgregar = true;
+					btnActualizar = false;
+					btnEliminar = false;
+					setearTextInputAdd();
 					vf.getPrincipal().mostrarPanelInput();
 				}
 			} catch (NotValidStringException e) {
@@ -555,9 +591,16 @@ public class Controller implements ActionListener {
 				if (mf.getpMaderaDAO()
 						.find(new ProyectoMadera(0, 0, 0, nombreA, null, null, false, false, false)) == null) {
 					vf.getCon().mostrarAlerta("No es posible encontrar el producto a actualizar, verifique el nombre");
+					actualizar = false;
 				} else {
+					clearFields();
 					vf.getCon().mostrarAlerta("Producto encontrado, ingrese los datos a actualizar");
 					setearAddProyecto();
+					actualizar = true;
+					btnAgregar = true;
+					btnActualizar = false;
+					btnEliminar = false;
+					setearTextInputAdd();
 					vf.getPrincipal().mostrarPanelInput();
 				}
 			} catch (NotValidStringException e) {
@@ -764,6 +807,7 @@ public class Controller implements ActionListener {
 				if (mf.getPincelDAO().delete(new PincelDTO(0, 0, 0, delete, null, null, null, null, null)) == false) {
 					vf.getCon().mostrarAlerta("No es posible encontrar el producto a eliminar, verifique el nombre");
 				} else {
+					clearFields();
 					vf.getCon().mostrarMensajeEmergente("Producto " + delete + " eliminado");
 				}
 			} catch (NotValidStringException e) {
@@ -781,6 +825,7 @@ public class Controller implements ActionListener {
 				if (mf.getPinturaDAO().delete(new PinturaDTO(0, 0, 0, delete, null, null, null, 0, false)) == false) {
 					vf.getCon().mostrarAlerta("No es posible encontrar el producto a eliminar, verifique el nombre");
 				} else {
+					clearFields();
 					vf.getCon().mostrarMensajeEmergente("Producto " + delete + " eliminado");
 				}
 			} catch (NotValidStringException e) {
@@ -799,6 +844,7 @@ public class Controller implements ActionListener {
 						.delete(new ProyectoMaderaDTO(0, 0, 0, delete, null, null, false, false, false)) == false) {
 					vf.getCon().mostrarAlerta("No es posible encontrar el producto a eliminar, verifique el nombre");
 				} else {
+					clearFields();
 					vf.getCon().mostrarMensajeEmergente("Producto " + delete + " eliminado");
 				}
 			} catch (NotValidStringException e) {
@@ -1083,6 +1129,22 @@ public class Controller implements ActionListener {
 		vf.getPrincipal().getInputPanel().getImgRemovePintura().setVisible(false);
 		vf.getPrincipal().getInputPanel().getImgRemoveProyecto().setVisible(true);
 
+	}
+
+	/**
+	 * Vacia los campos de los textField del panel donde se reciben los datos
+	 * 
+	 */
+	public void clearFields() {
+		vf.getPrincipal().getInputPanel().getNameField().setText("");
+		vf.getPrincipal().getInputPanel().getPrecioCompraField().setText("");
+		vf.getPrincipal().getInputPanel().getPrecioVentaField().setText("");
+		vf.getPrincipal().getInputPanel().getCantidadField().setText("");
+		vf.getPrincipal().getInputPanel().getTamanioField().setText("");
+		vf.getPrincipal().getInputPanel().getMarcaField().setText("");
+		vf.getPrincipal().getInputPanel().getPropioField1().setText("");
+		vf.getPrincipal().getInputPanel().getPropioField2().setText("");
+		vf.getPrincipal().getInputPanel().getPropioField3().setText("");
 	}
 
 	/**

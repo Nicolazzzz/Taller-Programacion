@@ -33,7 +33,7 @@ public class ExceptionChecker {
 	 * @throws NotValidStringException si la cadena contiene caracteres no válidos
 	 */
 	public static void chequearStringValida(String string) throws NotValidStringException {
-		Pattern p = Pattern.compile("[^a-zA-Z ]");
+		Pattern p = Pattern.compile("[^a-zA-ZñÑ ]");
 		Matcher m = p.matcher(string);
 		if (m.find()) {
 			throw new NotValidStringException();
@@ -73,7 +73,7 @@ public class ExceptionChecker {
 	 * @throws InvalidPaintColorException si el color contiene caracteres no válidos
 	 */
 	public static void chequearColorPintura(String color) throws InvalidPaintColorException {
-		Pattern p = Pattern.compile("[^a-zA-Z ]");
+		Pattern p = Pattern.compile("[^a-zA-ZñÑ ]");
 		Matcher m = p.matcher(color);
 		if (m.find()) {
 			throw new InvalidPaintColorException();

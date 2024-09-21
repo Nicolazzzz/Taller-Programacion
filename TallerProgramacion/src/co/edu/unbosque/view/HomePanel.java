@@ -105,7 +105,7 @@ public class HomePanel extends JPanel {
 		pinturaButton.setActionCommand("PINTURAS");
 
 		proyectoButton = new JButton("Proyectos");
-		proyectoButton.setOpaque(true);
+		proyectoButton.setOpaque(false);
 		proyectoButton.setBounds(10, 360, 190, 50);
 		proyectoButton.setActionCommand("PROYECTOS");
 
