@@ -14,9 +14,10 @@ import java.io.Serializable;
 public class Pincel extends Producto implements Serializable {
 
 	/**
-	 * 
+	 * Número de versión para la serialización.
 	 */
 	private static final long serialVersionUID = 1L;
+
 	private String grosorCerda;
 	private String material;
 	private String tipoPincel;
@@ -29,8 +30,7 @@ public class Pincel extends Producto implements Serializable {
 	}
 
 	/**
-	 * Constructor que inicializa un Pincel con sus atributos específicos: grosor de
-	 * la cerda, material y tipo de pincel.
+	 * Constructor que inicializa un Pincel con sus atributos específicos.
 	 * 
 	 * @param grosorCerda el grosor de las cerdas del pincel.
 	 * @param material    el material del pincel.
@@ -144,5 +144,4 @@ public class Pincel extends Producto implements Serializable {
 		return super.toString() + "\nGrosor Cerdas: " + grosorCerda + "\nMaterial: " + material + "\nTipo Pincel: "
 				+ tipoPincel;
 	}
-
 }

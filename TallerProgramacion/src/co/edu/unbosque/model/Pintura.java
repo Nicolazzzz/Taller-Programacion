@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * La clase Pintura extiende la clase Producto e incorpora propiedades
  * adicionales específicas de una pintura, como su color, contenido en
- * mililitros, y si es vinilo o óleo.
+ * mililitros, y si es vinilo o no.
  * 
  * @author MARIO RODRIGUEZ
  * @version 1.0
@@ -14,9 +14,10 @@ import java.io.Serializable;
 public class Pintura extends Producto implements Serializable {
 
 	/**
-	 * 
+	 * Número de versión para la serialización.
 	 */
 	private static final long serialVersionUID = 2L;
+
 	private String color;
 	private float contenidoMl;
 	private boolean esVinilo;
@@ -29,14 +30,11 @@ public class Pintura extends Producto implements Serializable {
 	}
 
 	/**
-	 * Constructor que inicializa una Pintura con los atributos específicos: color,
-	 * contenido en mililitros, y si es vinilo o óleo.
+	 * Constructor que inicializa una Pintura con los atributos específicos.
 	 * 
 	 * @param color       el color de la pintura.
 	 * @param contenidoMl el contenido de la pintura en mililitros.
 	 * @param esVinilo    true si la pintura es de tipo vinilo, false en caso
-	 *                    contrario.
-	 * @param esOleo      true si la pintura es de tipo óleo, false en caso
 	 *                    contrario.
 	 */
 	public Pintura(String color, float contenidoMl, boolean esVinilo) {
@@ -44,7 +42,6 @@ public class Pintura extends Producto implements Serializable {
 		this.color = color;
 		this.contenidoMl = contenidoMl;
 		this.esVinilo = esVinilo;
-
 	}
 
 	/**
@@ -61,8 +58,6 @@ public class Pintura extends Producto implements Serializable {
 	 * @param contenidoMl  el contenido de la pintura en mililitros.
 	 * @param esVinilo     true si la pintura es de tipo vinilo, false en caso
 	 *                     contrario.
-	 * @param esOleo       true si la pintura es de tipo óleo, false en caso
-	 *                     contrario.
 	 */
 	public Pintura(double precioCompra, double precioVenta, int cantidad, String nombre, String tamanio, String marca,
 			String color, float contenidoMl, boolean esVinilo) {
@@ -70,7 +65,6 @@ public class Pintura extends Producto implements Serializable {
 		this.color = color;
 		this.contenidoMl = contenidoMl;
 		this.esVinilo = esVinilo;
-
 	}
 
 	/**
@@ -117,7 +111,7 @@ public class Pintura extends Producto implements Serializable {
 	/**
 	 * Establece el contenido de la pintura en mililitros.
 	 * 
-	 * @param contenidoMl el contenido de la pintura a asignar.
+	 * @param contenidoMl el contenido de la pintura en mililitros a asignar.
 	 */
 	public void setContenidoMl(float contenidoMl) {
 		this.contenidoMl = contenidoMl;
@@ -143,12 +137,6 @@ public class Pintura extends Producto implements Serializable {
 	}
 
 	/**
-	 * Verifica si la pintura es de tipo óleo.
-	 * 
-	 * @return true si la pintura es óleo, false en caso contrario.
-	 */
-
-	/**
 	 * Devuelve una representación en cadena de los atributos de la pintura,
 	 * incluyendo la información heredada de la clase Producto.
 	 * 
@@ -159,5 +147,4 @@ public class Pintura extends Producto implements Serializable {
 		return super.toString() + "\nColor: " + color + "\nContenido ML: " + contenidoMl + "ml" + "\nEs Vinilo: "
 				+ esVinilo;
 	}
-
 }

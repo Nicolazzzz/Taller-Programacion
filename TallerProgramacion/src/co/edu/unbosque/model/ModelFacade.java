@@ -16,7 +16,6 @@ import co.edu.unbosque.model.persistence.ProyectoMaderaDAO;
  * @since 2024-04-27
  */
 public class ModelFacade {
-
 	private PincelDAO pincelDAO;
 	private PinturaDAO pinturaDAO;
 	private ProyectoMaderaDAO pMaderaDAO;
@@ -34,7 +33,7 @@ public class ModelFacade {
 	/**
 	 * Obtiene la instancia de PincelDAO.
 	 * 
-	 * @return instancia de PincelDAO.
+	 * @return La instancia de PincelDAO.
 	 */
 	public PincelDAO getPincelDAO() {
 		return pincelDAO;
@@ -43,7 +42,7 @@ public class ModelFacade {
 	/**
 	 * Establece la instancia de PincelDAO.
 	 * 
-	 * @param pincelDAO instancia de PincelDAO a asignar.
+	 * @param pincelDAO La instancia de PincelDAO a asignar.
 	 */
 	public void setPincelDAO(PincelDAO pincelDAO) {
 		this.pincelDAO = pincelDAO;
@@ -52,7 +51,7 @@ public class ModelFacade {
 	/**
 	 * Obtiene la instancia de PinturaDAO.
 	 * 
-	 * @return instancia de PinturaDAO.
+	 * @return La instancia de PinturaDAO.
 	 */
 	public PinturaDAO getPinturaDAO() {
 		return pinturaDAO;
@@ -61,7 +60,7 @@ public class ModelFacade {
 	/**
 	 * Establece la instancia de PinturaDAO.
 	 * 
-	 * @param pinturaDAO instancia de PinturaDAO a asignar.
+	 * @param pinturaDAO La instancia de PinturaDAO a asignar.
 	 */
 	public void setPinturaDAO(PinturaDAO pinturaDAO) {
 		this.pinturaDAO = pinturaDAO;
@@ -70,7 +69,7 @@ public class ModelFacade {
 	/**
 	 * Obtiene la instancia de ProyectoMaderaDAO.
 	 * 
-	 * @return instancia de ProyectoMaderaDAO.
+	 * @return La instancia de ProyectoMaderaDAO.
 	 */
 	public ProyectoMaderaDAO getpMaderaDAO() {
 		return pMaderaDAO;
@@ -79,10 +78,9 @@ public class ModelFacade {
 	/**
 	 * Establece la instancia de ProyectoMaderaDAO.
 	 * 
-	 * @param pMaderaDAO instancia de ProyectoMaderaDAO a asignar.
+	 * @param pMaderaDAO La instancia de ProyectoMaderaDAO a asignar.
 	 */
 	public void setpMaderaDAO(ProyectoMaderaDAO pMaderaDAO) {
 		this.pMaderaDAO = pMaderaDAO;
 	}
-
 }

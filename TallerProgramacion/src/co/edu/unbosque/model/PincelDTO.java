@@ -24,8 +24,8 @@ public class PincelDTO extends ProductoDTO {
 	}
 
 	/**
-	 * Constructor que inicializa un PincelDTO con los atributos específicos: grosor
-	 * de la cerda, material y tipo de pincel.
+	 * Constructor que inicializa un PincelDTO con los atributos específicos del
+	 * pincel.
 	 * 
 	 * @param grosorCerda el grosor de las cerdas del pincel.
 	 * @param material    el material del pincel.
@@ -78,7 +78,7 @@ public class PincelDTO extends ProductoDTO {
 	/**
 	 * Obtiene el grosor de las cerdas del pincel.
 	 * 
-	 * @return el grosor de las cerdas.
+	 * @return el grosor de las cerdas del pincel.
 	 */
 	public String getGrosorCerda() {
 		return grosorCerda;
@@ -87,7 +87,7 @@ public class PincelDTO extends ProductoDTO {
 	/**
 	 * Establece el grosor de las cerdas del pincel.
 	 * 
-	 * @param grosorCerda el grosor de las cerdas a asignar.
+	 * @param grosorCerda el grosor de las cerdas del pincel a asignar.
 	 */
 	public void setGrosorCerda(String grosorCerda) {
 		this.grosorCerda = grosorCerda;
@@ -140,5 +140,4 @@ public class PincelDTO extends ProductoDTO {
 		return super.toString() + "\nGrosor Cerdas: " + grosorCerda + "\nMaterial: " + material + "\nTipo Pincel: "
 				+ tipoPincel;
 	}
-
 }

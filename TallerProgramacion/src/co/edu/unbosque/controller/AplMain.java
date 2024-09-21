@@ -1,12 +1,11 @@
 package co.edu.unbosque.controller;
 
 /**
- * The AplMain class serves as the entry point to the application. It
- * initializes the Controller class, which is responsible for managing the flow
- * of the program.
+ * La clase AplMain sirve como punto de entrada a la aplicación. Inicializa la
+ * clase Controller, que es responsable de gestionar el flujo del programa.
  * <p>
- * When the application is started, the main method is executed, creating an
- * instance of the Controller class.
+ * Cuando se inicia la aplicación, se ejecuta el método main, creando una
+ * instancia de la clase Controller.
  * </p>
  * 
  * @author MARIO RODRIGUEZ
@@ -15,14 +14,14 @@ package co.edu.unbosque.controller;
  */
 public class AplMain {
 
-	/**
-	 * The main method is the entry point of the application. It creates an instance
-	 * of the Controller class, which manages the overall execution of the program.
-	 *
-	 * @param args Command-line arguments (not used in this application)
-	 */
-	public static void main(String[] args) {
-		Controller controlador = new Controller();
-	}
+    /**
+     * El método main es el punto de entrada de la aplicación. Crea una instancia
+     * de la clase Controller, que gestiona la ejecución general del programa.
+     *
+     * @param args Argumentos de la línea de comandos (no utilizados en esta aplicación)
+     */
+    public static void main(String[] args) {
+        Controller controlador = new Controller();
+    }
 
 }
