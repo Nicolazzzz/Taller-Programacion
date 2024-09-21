@@ -69,7 +69,7 @@ public class Controller implements ActionListener {
 		mf = new ModelFacade();
 		asignarLectores();
 		fillHomeGaps();
-		vf.getCon().mostrarMensajeEmergente("BIENVENIDA(O)!");
+		vf.getCon().mostrarMensajeEmergente("BIENVENIDA!");
 
 	}
 
@@ -226,6 +226,7 @@ public class Controller implements ActionListener {
 			break;
 
 		case "AGREGARLOBBY":
+			vf.getCon().mostrarAlerta("Una vez colocados los datos dele click nuevamente a AGREGAR");
 			btnAgregar = true;
 			btnActualizar = false;
 			btnEliminar = false;
@@ -237,6 +238,7 @@ public class Controller implements ActionListener {
 			break;
 
 		case "ACTUALIZARLOBBY":
+			vf.getCon().mostrarAlerta("Una vez colocados los datos dele click nuevamente a ACTUALIZAR");
 			btnAgregar = false;
 			btnActualizar = true;
 			btnEliminar = false;
@@ -248,6 +250,7 @@ public class Controller implements ActionListener {
 			break;
 
 		case "ELIMINARLOBBY":
+			vf.getCon().mostrarAlerta("Una vez colocados los datos dele click nuevamente a ELIMINAR");
 			btnAgregar = false;
 			btnActualizar = false;
 			btnEliminar = true;
@@ -259,7 +262,6 @@ public class Controller implements ActionListener {
 			break;
 
 		case "MOSTRARLOBBY":
-
 			mostrarProducto();
 			break;
 
@@ -547,6 +549,7 @@ public class Controller implements ActionListener {
 				} else {
 					clearFields();
 					vf.getCon().mostrarAlerta("Producto encontrado, ingrese los datos a actualizar");
+					vf.getCon().mostrarAlerta("Al finalizar dele click a AGREGAR");
 					setearAddPincel();
 					actualizar = true;
 					btnAgregar = true;
@@ -571,6 +574,7 @@ public class Controller implements ActionListener {
 				} else {
 					clearFields();
 					vf.getCon().mostrarAlerta("Producto encontrado, ingrese los datos a actualizar");
+					vf.getCon().mostrarAlerta("Al finalizar dele click a AGREGAR");
 					setearAddPintura();
 					actualizar = true;
 					btnAgregar = true;
@@ -595,6 +599,7 @@ public class Controller implements ActionListener {
 				} else {
 					clearFields();
 					vf.getCon().mostrarAlerta("Producto encontrado, ingrese los datos a actualizar");
+					vf.getCon().mostrarAlerta("Al finalizar dele click a AGREGAR");
 					setearAddProyecto();
 					actualizar = true;
 					btnAgregar = true;
