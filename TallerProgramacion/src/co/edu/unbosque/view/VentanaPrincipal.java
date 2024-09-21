@@ -27,7 +27,7 @@ public class VentanaPrincipal extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(null);
 		setResizable(false);
-		setTitle("BIENVENIDA!");
+		setTitle("ASERRIN ASERRAN");
 
 		homePanel = new HomePanel();
 		coverPanel = new CoverPanel();
