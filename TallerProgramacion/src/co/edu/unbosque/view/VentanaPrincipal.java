@@ -29,7 +29,7 @@ public class VentanaPrincipal extends JFrame {
 		setLayout(null);
 		setResizable(false);
 
-		setTitle("BIENVENIDA!");
+		setTitle("ASERRIN ASERRAN");
 		
 		ImageIcon logoVentana = new ImageIcon("src/media/logo.jpg");
 		setIconImage(logoVentana.getImage());
